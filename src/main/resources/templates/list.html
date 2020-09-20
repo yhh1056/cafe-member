@@ -7,8 +7,21 @@
 <body>
 <h2>안녕하세요 메뉴를 관리하는 페이지입니다</h2>
 
-<p><button type="button" onclick="location.href='/write'">메뉴 추가하기</button> </p>
+<p>
+    <button type="button" onclick="location.href='/write'">메뉴 추가하기</button>
+</p>
 
 <h2>현재 메뉴입니다</h2>
+
+<table border="1">
+    <th>번호</th>
+    <th>메뉴</th>
+    <th>가격</th>
+    <tr th:each="menu : ${menus}">
+        <td>id</td>
+        <td th:text="${menu.name}"></td>
+        <td th:text="${menu.price}"></td>
+    </tr>
+</table>
 </body>
 </html>
