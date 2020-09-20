@@ -4,7 +4,6 @@ import cafeorder.domain.Menu;
 import cafeorder.repository.MenuRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;

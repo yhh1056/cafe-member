@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class OrderController {
-
     private final MenuService menuService;
 
     @Autowired
@@ -24,27 +23,30 @@ public class OrderController {
     }
 
     @GetMapping("/")
-    public String list() {
-        return "list";
+    public String admin() {
+        return "admin";
     }
 
     @GetMapping("/write")
-    public String add() {
+    public String write() {
         return "write";
     }
 
+    @GetMapping("/list")
+    public String list(Model model) {
+        model.addAttribute("menus", menuService.getAllMenu());
+        return "/list";
+    }
 
     /**
      * TODO : 숫자가 문자일 경우 예외처리
      */
-    @PostMapping("/write")
-    public String write(@RequestParam(value = "name") String name,
-                        @RequestParam(value = "price") int price,
-                        Model model) {
+    @PostMapping("/admin")
+    public String add(@RequestParam(value = "name") String name,
+                        @RequestParam(value = "price") int price) {
         Menu menu = new Menu(name, price);
         menuService.addMenu(menu);
 
-        model.addAttribute("menus", menuService.getAllMenu());
-        return "list";
+        return "/admin";
     }
 }
