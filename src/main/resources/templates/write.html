@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2> 추가하실 메뉴를 입력해주세요</h2>
+<form action="/write" method="post">
+    <p> 이름 <label>
+        <input type="text" name="name" align="right"/>
+    </label></p>
+
+    <p> 가격 <label>
+        <input type="text" name="price" align="right"/>
+    </label></p>
+
+    <p><input type="submit" value="추가하기"/></p>
+</form>
+</body>
+</html>
