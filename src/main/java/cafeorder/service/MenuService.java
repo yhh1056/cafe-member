@@ -2,6 +2,7 @@ package cafeorder.service;
 
 import cafeorder.domain.Menu;
 import cafeorder.repository.MenuRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,18 +13,23 @@ import java.util.List;
  * Create by {2020/09/20}
  */
 @Service
-@Transactional
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class MenuService {
 
     private final MenuRepository menuRepository;
 
-    public MenuService(MenuRepository menuRepository) {
-        this.menuRepository = menuRepository;
+    @Transactional
+    public void addMenu(Menu menu) {
+        validIsExistedMenu(menu);
+        menuRepository.save(menu);
     }
 
-
-    public void addMenu(Menu menu) {
-        menuRepository.save(menu);
+    private void validIsExistedMenu(Menu menu) {
+        List<Menu> menus = menuRepository.findByName(menu.getName());
+        if (!menus.isEmpty()) {
+            throw new IllegalStateException("이미 존재하는 메뉴입니다.");
+        }
     }
 
     public List<Menu> getAllMenu() {

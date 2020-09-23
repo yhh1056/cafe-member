@@ -15,6 +15,7 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class Menu {
     @Id
@@ -22,14 +23,16 @@ public class Menu {
     private Long id;
 
     @Column(name = "menu_name")
-    @Getter
     private String name;
 
-    @Getter
     private int price;
 
     public Menu(String name, int price) {
         this.name = name;
         this.price = price;
+    }
+
+    public boolean equals(Menu menu) {
+        return menu.getName().equals(this.name);
     }
 }

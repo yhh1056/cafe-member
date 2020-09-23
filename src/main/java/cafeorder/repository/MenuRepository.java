@@ -1,10 +1,10 @@
 package cafeorder.repository;
 
 import cafeorder.domain.Menu;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,15 +14,16 @@ import java.util.List;
  * Create by {2020/09/20}
  */
 @Repository
+@RequiredArgsConstructor
 public class MenuRepository {
-    @PersistenceContext
-    EntityManager em;
-    private List<Menu> menus = new ArrayList<>();
+    private final EntityManager em;
 
     public void save(Menu menu) {
         em.persist(menu);
-        em.flush();
-        em.close();
+    }
+
+    public Menu findById(Long id) {
+        return em.find(Menu.class, id);
     }
 
     public List<Menu> findAll() {
@@ -30,5 +31,11 @@ public class MenuRepository {
         em.close();
 
         return Collections.unmodifiableList(new ArrayList<>(menus));
+    }
+
+    public List<Menu> findByName(String name) {
+        return em.createQuery("select m from Menu m where m.name = :name", Menu.class).
+                setParameter("name", name)
+                .getResultList();
     }
 }
