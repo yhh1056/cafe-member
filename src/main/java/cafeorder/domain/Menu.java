@@ -1,13 +1,9 @@
 package cafeorder.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * author {yhh1056}
@@ -26,6 +22,9 @@ public class Menu {
     private String name;
 
     private int price;
+
+    @Enumerated(EnumType.STRING)
+    private MenuKinds menuKinds;
 
     public Menu(String name, int price) {
         this.name = name;
