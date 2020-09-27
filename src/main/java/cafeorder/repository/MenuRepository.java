@@ -27,14 +27,14 @@ public class MenuRepository {
     }
 
     public List<Menu> findAll() {
-        List<Menu> menus = em.createQuery("select m from Menu m", Menu.class).getResultList();
+        List<Menu> menus = em.createQuery("SELECT m FROM Menu m", Menu.class).getResultList();
         em.close();
 
         return Collections.unmodifiableList(new ArrayList<>(menus));
     }
 
     public List<Menu> findByName(String name) {
-        return em.createQuery("select m from Menu m where m.name = :name", Menu.class).
+        return em.createQuery("SELECT m FROM Menu m WHERE m.name = :name", Menu.class).
                 setParameter("name", name)
                 .getResultList();
     }

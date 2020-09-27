@@ -21,11 +21,11 @@ public class MenuService {
 
     @Transactional
     public void addMenu(Menu menu) {
-        validIsExistedMenu(menu);
+        isExistedMenu(menu);
         menuRepository.save(menu);
     }
 
-    private void validIsExistedMenu(Menu menu) {
+    private void isExistedMenu(Menu menu) {
         List<Menu> menus = menuRepository.findByName(menu.getName());
         if (!menus.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 메뉴입니다.");
