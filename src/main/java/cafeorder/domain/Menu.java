@@ -1,5 +1,6 @@
 package cafeorder.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Menu {
     @Id
     @GeneratedValue
@@ -23,13 +24,14 @@ public class Menu {
 
     private int price;
 
-    @Enumerated(EnumType.STRING)
-    private MenuKinds menuKinds;
-
-    public Menu(String name, int price) {
+    public Menu(String name, int price, MenuType menuType) {
         this.name = name;
         this.price = price;
+        this.menuType = menuType;
     }
+
+    @Enumerated(EnumType.STRING)
+    private MenuType menuType;
 
     public boolean equals(Menu menu) {
         return menu.getName().equals(this.name);

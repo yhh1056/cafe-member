@@ -1,6 +1,7 @@
 package cafeorder.controller;
 
 import cafeorder.domain.Menu;
+import cafeorder.domain.MenuType;
 import cafeorder.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,11 +41,14 @@ public class OrderController {
 
     /**
      * TODO : 숫자가 문자일 경우 예외처리
+     * 스위치문 리팩토링
      */
     @PostMapping("/admin")
     public String add(@RequestParam(value = "name") String name,
-                        @RequestParam(value = "price") int price) {
-        Menu menu = new Menu(name, price);
+                        @RequestParam(value = "price") int price,
+                      @RequestParam(value = "type") MenuType type) {
+
+        Menu menu = new Menu(name, price, type);
         menuService.addMenu(menu);
 
         return "/admin";

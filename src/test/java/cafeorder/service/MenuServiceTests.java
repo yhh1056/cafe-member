@@ -1,6 +1,7 @@
 package cafeorder.service;
 
 import cafeorder.domain.Menu;
+import cafeorder.domain.MenuType;
 import cafeorder.repository.MenuRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,19 +32,28 @@ class MenuServiceTests {
     @Test
     @DisplayName("메뉴 추가기능")
     void addMenu() {
-        Menu menu = new Menu("아메리카노", 4000);
-        menuService.addMenu(menu);
+        Menu menu = createMenu();
 
+        menuService.addMenu(menu);
         assertEquals(1, menuRepository.findAll().size());
     }
 
     @Test
     @DisplayName("이미 존재하는 메뉴를 등록하는 경우")
     void isExistedMenu() {
-        //given
-        menuService.addMenu(new Menu("아메리카노", 4000));
-        //then
+        Menu menu = createMenu();
+        menuService.addMenu(menu);
+
+        Menu equalsMenu = createMenu();
         assertThrows(IllegalStateException.class,
-                () -> menuService.addMenu(new Menu("아메리카노", 4500)));
+                () -> menuService.addMenu(equalsMenu));
+    }
+
+    private Menu createMenu() {
+        String name = "아메리카노";
+        int price = 4000;
+        MenuType kind = MenuType.COFFEE;
+
+        return new Menu(name, price, kind);
     }
 }
