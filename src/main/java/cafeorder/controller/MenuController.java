@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.lang.reflect.Member;
+import java.util.List;
 
 /**
  * author {yhh1056}
@@ -24,7 +26,7 @@ public class MenuController {
     private final MenuService menuService;
 
     @GetMapping("/menu/new")
-    public String list(Model model) {
+    public String create(Model model) {
         model.addAttribute("menuForm", new MenuForm());
         return "menu/createMenuForm";
     }
@@ -50,5 +52,13 @@ public class MenuController {
         menuService.addMenu(dto.toEntity());
 
         return "redirect:/";
+    }
+
+    @GetMapping("/menu/menus")
+    public String list(Model model) {
+        MenuDto dto = new MenuDto();
+        dto.setMenus(menuService.getAllMenu());
+        model.addAttribute("menus", dto.getMenus());
+        return "menu/list";
     }
 }

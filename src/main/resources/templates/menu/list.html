@@ -13,7 +13,7 @@
     <th>가격</th>
     <th>종류</th>
     <tr th:each="menu : ${menus}">
-        <td>id</td>
+        <td th:text="${menuStat.count}"></td>
         <td th:text="${menu.name}"></td>
         <td th:text="${menu.price}"></td>
         <td th:text="${menu.menuType}"></td>
