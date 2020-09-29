@@ -2,6 +2,7 @@ package cafeorder.controller;
 
 import cafeorder.domain.Menu;
 import cafeorder.domain.MenuType;
+import cafeorder.dto.MenuDto;
 import cafeorder.service.MenuService;
 import cafeorder.web.MenuForm;
 import lombok.RequiredArgsConstructor;
@@ -37,13 +38,16 @@ public class MenuController {
         if (result.hasErrors()) {
             return "menu/createMenuForm";
         }
-        String name = form.getName();
-        int price = form.getPrice();
-        MenuType menuType = form.getMenuType();
 
-        System.out.println(name);
-        System.out.println(menuType);
-        menuService.addMenu(new Menu(name, price, menuType));
+        /**
+         * 이렇게 쓰는게 맞는지 알아볼 것
+         */
+        MenuDto dto = new MenuDto();
+        dto.setName(form.getName());
+        dto.setPrice(form.getPrice());
+        dto.setMenuType(form.getMenuType());
+
+        menuService.addMenu(dto.toEntity());
 
         return "redirect:/";
     }
