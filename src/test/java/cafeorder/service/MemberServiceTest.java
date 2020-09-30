@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -33,5 +35,19 @@ class MemberServiceTest {
         memberService.add(member);
 
         assertEquals(1, repository.findByName("직원1").size());
+    }
+
+    @Test
+    @DisplayName("근무 시간 추가")
+    void addTime() {
+        Member member = new Member("직원1");
+        memberService.add(member);
+
+        memberService.addTime(member.getName(), 30, 3000);
+
+        List<Member> list = repository.findAll();
+
+        assertEquals("직원1", list.get(0).getName());
+        assertEquals(30, list.get(0).getTime());
     }
 }

@@ -49,11 +49,21 @@ public class MemberController {
      * DTO로 바꿀것
      */
     @GetMapping("/member/calc")
-    public String calc(Model model) {
+    public String input(Model model) {
         List<Member> list = memberService.getAll();
-        model.addAttribute("memberCalcFrom", new MemberCalcForm(list));
+        model.addAttribute("members", list);
+        model.addAttribute("memberCalcForm", new MemberCalcForm());
 
         return "/member/createCalcMemberForm";
     }
 
+    @PostMapping("/member/calc")
+    public String calc(MemberCalcForm form) {
+        String name = form.getName();
+        int weekTime = form.getTime();
+        int hourlyWage = form.getHourlyWage();
+        memberService.addTime(name, weekTime, hourlyWage);
+
+        return "redirect:/";
+    }
 }

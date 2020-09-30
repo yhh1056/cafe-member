@@ -1,11 +1,9 @@
 package cafeorder.web;
 
-import cafeorder.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * author {yhh1056}
@@ -19,22 +17,9 @@ public class MemberCalcForm {
     private String name;
 
     @NotNull
-    private int weekTime;
+    private int time;
 
     @NotNull
     private int hourlyWage;
 
-    private List<Member> members;
-
-    public MemberCalcForm(List<Member> members) {
-        this.members = members;
-    }
-
-    public void addTimeInfo(String name, int weekTime, int hourlyWage) {
-        for (Member m : members) {
-            if (m.equals(name)) {
-                m.addTime(weekTime, hourlyWage);
-            }
-        }
-    }
 }

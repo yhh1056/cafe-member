@@ -25,7 +25,7 @@ public class Member {
     @Column(name = "member_name")
     private String name;
 
-    private int weekTime;
+    private int time;
 
     private int hourlyWage;
 
@@ -35,16 +35,16 @@ public class Member {
         this.name = name;
     }
 
-    public int calcWeekWage(int time) {
+    public int calcWeekWage() {
         return hourlyWage * time;
     }
 
     public boolean equals(String name) {
-        return super.equals(name);
+        return this.name.equals(name);
     }
 
     public void addTime(int weekTime, int hourlyWage){
-        this.weekTime = weekTime;
+        this.time = weekTime;
         this.hourlyWage = hourlyWage;
     }
 }
