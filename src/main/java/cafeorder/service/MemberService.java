@@ -31,6 +31,9 @@ public class MemberService {
         if (!members.isEmpty()) {
             throw new IllegalArgumentException("같은 이름의 직원이 존재합니다");
         }
+    }
 
+    public List<Member> getAll() {
+        return repository.findAll();
     }
 }

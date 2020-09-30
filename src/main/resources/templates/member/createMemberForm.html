@@ -11,7 +11,7 @@
 
 <form action="/member/new" method="post" th:object="${memberForm}">
     <p>
-        <label th:for="name">이름</label>
+        <label th:for="name"></label>
         <input type="text" th:field="*{name}" align="right"
                th:class="${#fields.hasErrors('name')}?
                    'form-control fieldError' : 'form-control'"/>

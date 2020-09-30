@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    } </style>
+<meta charset="UTF-8">
+
+<body>
+<h2>시급과 주간 근무시간을 입력해주세요</h2>
+
+<form action="/member/calc" method="post" th:object="${memberCalcFrom}">
+    <div th:object="${memberCalcFrom}">
+        <select name="members">
+            <option value="name">직원 선택</option>
+            <option th:each="member : ${memberCalcFrom.getMembers()}"
+                    th:text="${member.name}"></option>
+        </select>
+    </div>
+    <p>
+        <label th:for="weekTime">근무 시간</label>
+        <input type="text" th:field="*{weekTime}" align="right"/>
+    </p>
+    <p>
+        <label th:for="weekTime">시급</label>
+        <input type="text" th:field="*{hourlyWage}" align="right"/>
+    </p>
+    <p>
+        <input type="submit" value="계산하기"/>
+    </p>
+
+</form>
+</body>
+</html>

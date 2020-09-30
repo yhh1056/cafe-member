@@ -1,9 +1,10 @@
 package cafeorder.controller;
 
+import cafeorder.domain.Member;
 import cafeorder.dto.MemberDto;
 import cafeorder.service.MemberService;
+import cafeorder.web.MemberCalcForm;
 import cafeorder.web.MemberForm;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * author {yhh1056}
@@ -42,4 +44,16 @@ public class MemberController {
 
         return "redirect:/";
     }
+
+    /**
+     * DTO로 바꿀것
+     */
+    @GetMapping("/member/calc")
+    public String calc(Model model) {
+        List<Member> list = memberService.getAll();
+        model.addAttribute("memberCalcFrom", new MemberCalcForm(list));
+
+        return "/member/createCalcMemberForm";
+    }
+
 }
