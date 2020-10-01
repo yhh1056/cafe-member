@@ -29,13 +29,11 @@ public class Member {
 
     private int hourlyWage;
 
-    private int totalWage;
-
     public Member(String name) {
         this.name = name;
     }
 
-    public int calcWeekWage() {
+    public int totalWage() {
         return hourlyWage * time;
     }
 

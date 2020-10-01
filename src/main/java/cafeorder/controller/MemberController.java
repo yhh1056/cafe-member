@@ -66,4 +66,13 @@ public class MemberController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/member/members")
+    public String list(Model model) {
+        List<Member> list = memberService.getAll();
+        model.addAttribute("members", list);
+
+        return "/member/members";
+    }
+
 }
