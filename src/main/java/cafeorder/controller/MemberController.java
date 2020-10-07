@@ -73,5 +73,4 @@ public class MemberController {
 
         return "/member/members";
     }
-
 }

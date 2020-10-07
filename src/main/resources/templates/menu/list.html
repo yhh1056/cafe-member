@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h2>현재 메뉴입니다</h2>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <h2>현재 메뉴입니다</h2>
 
-<table border="1">
-    <th>번호</th>
-    <th>메뉴</th>
-    <th>가격</th>
-    <th>종류</th>
-    <tr th:each="menu : ${menus}">
-        <td th:text="${menuStat.count}"></td>
-        <td th:text="${menu.name}"></td>
-        <td th:text="${menu.price}"></td>
-        <td th:text="${menu.menuType}"></td>
-    </tr>
-</table>
+        <table border="1">
+            <th>번호</th>
+            <th>메뉴</th>
+            <th>가격</th>
+            <th>종류</th>
+            <tr th:each="menu : ${menus}">
+                <td th:text="${menuStat.count}"></td>
+                <td th:text="${menu.name}"></td>
+                <td th:text="${menu.price}"></td>
+                <td th:text="${menu.menuType}"></td>
+            </tr>
+        </table>
 
-</body>
+    </body>
 </html>

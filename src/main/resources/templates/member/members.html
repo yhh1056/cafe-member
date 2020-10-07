@@ -19,12 +19,12 @@
     <tr th:each="member : ${members}">
         <td th:text="${memberStat.count}"></td>
         <td th:text="${member.name}"></td>
-        <td th:text="${member.week1Wage()}"></td>
-        <td th:text="${member.week2Wage()}"></td>
-        <td th:text="${member.week3Wage()}"></td>
-        <td th:text="${member.week4Wage()}"></td>
-        <td th:text="${member.week5Wage()}"></td>
-        <td th:text="${member.totalWage()}"></td>
+        <td th:text="${member.oneWeekWage}"></td>
+        <td th:text="${member.twoWeekWage}"></td>
+        <td th:text="${member.threeWeekWage}"></td>
+        <td th:text="${member.fourWeekWage}"></td>
+        <td th:text="${member.fiveWeekWage}"></td>
+        <td th:text="${member.totalWage}"></td>
     </tr>
 </table>
 

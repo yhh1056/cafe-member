@@ -28,11 +28,16 @@ public class Member {
     @JoinColumn(name = "time_id")
     private Time time;
 
+    private int oneWeekWage;
+    private int twoWeekWage;
+    private int threeWeekWage;
+    private int fourWeekWage;
+    private int fiveWeekWage;
+    private int totalWage;
+
     public Member(String name) {
         this.name = name;
     }
-
-    private int totalWage;
 
     public void addTimeInfo(Time time) {
         this.time = time;
@@ -42,4 +47,13 @@ public class Member {
         return this.name.equals(name);
     }
 
+    public void calcWage() {
+        oneWeekWage = time.getOneWeekTime() * time.getHourlyWage();
+        twoWeekWage = time.getTwoWeekTime() * time.getHourlyWage();
+        threeWeekWage = time.getThreeWeekTime() * time.getHourlyWage();
+        fourWeekWage = time.getFourWeekTime() * time.getHourlyWage();
+        fiveWeekWage = time.getFiveWeekTime() * time.getHourlyWage();
+
+        totalWage = oneWeekWage + twoWeekWage + threeWeekWage + fourWeekWage + fiveWeekWage;
+    }
 }

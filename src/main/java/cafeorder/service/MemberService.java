@@ -49,6 +49,7 @@ public class MemberService {
             Time time = member.getTime();
             time.changeInfo(form.createTimeListForm(), hourlyWage);
         }
+        member.calcWage();
         memberRepository.save(member);
     }
 
