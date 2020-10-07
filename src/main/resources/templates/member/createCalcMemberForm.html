@@ -19,8 +19,8 @@
                     th:text="${member.name}">
             </option>
         </select>
+        주휴선택
     </div>
-
     <p>
         <label th:for="weekTime">1주차</label>
         <input type="text" th:field="*{time1}" align="right"/>
@@ -41,8 +41,6 @@
         <label th:for="weekTime">5주차</label>
         <input type="text" th:field="*{time5}" align="right"/>
     </p>
-
-
     <p>
         <label th:for="weekTime">시급</label>
         <input type="text" th:field="*{hourlyWage}" align="right"/>

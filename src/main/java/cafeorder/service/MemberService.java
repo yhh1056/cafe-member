@@ -1,7 +1,9 @@
 package cafeorder.service;
 
 import cafeorder.domain.Member;
+import cafeorder.domain.Time;
 import cafeorder.repository.MemberRepository;
+import cafeorder.web.MemberCalcForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +29,8 @@ public class MemberService {
     }
 
     private void isExisted(Member member) {
-        List<Member> members = memberRepository.findByName(member.getName());
-        if (!members.isEmpty()) {
+        List<Member> findMember = memberRepository.findByName(member.getName());
+        if (member.equals(findMember)) {
             throw new IllegalArgumentException("같은 이름의 직원이 존재합니다");
         }
     }
@@ -38,13 +40,25 @@ public class MemberService {
     }
 
     @Transactional
-    public void addTime(String name, List<Integer> times, int hourlyWage) {
-        List<Member> members = memberRepository.findAll();
-        for (Member member : members) {
-            if (member.equals(name)) {
-                member.addTime(times, hourlyWage);
-                memberRepository.save(member);
+    public void addTime(String name, int hourlyWage, MemberCalcForm form) {
+        Member member = getFindNameMember(name);
+        if (member.getTime() == null) {
+            Time time = new Time(form.createTimeListForm(), hourlyWage);
+            member.addTimeInfo(time);
+        } else {
+            Time time = member.getTime();
+            time.changeInfo(form.createTimeListForm(), hourlyWage);
+        }
+        memberRepository.save(member);
+    }
+
+    private Member getFindNameMember(String name) {
+        List<Member> members = memberRepository.findByName(name);
+        for (Member findMember : members) {
+            if (findMember.equals(name)) {
+                return findMember;
             }
         }
+        throw new IllegalStateException("존재하지 않는 직원입니다.");
     }
 }

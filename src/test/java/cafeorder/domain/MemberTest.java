@@ -20,7 +20,7 @@ class MemberTest {
 
         assertTrue(member.equals(name));
     }
-
+//
 //    @Test
 //    @DisplayName("시간 추가")
 //    void addTime() {
@@ -28,9 +28,9 @@ class MemberTest {
 //
 //        Member member = new Member("디노");
 //
-//        member.addTime(30, 8000);
+//        member.addTimeInfo(30);
 //
-//        assertEquals(30, member.getTime());
+//        assertEquals(30, member.getTime().getWeekTime());
 //    }
 
 }

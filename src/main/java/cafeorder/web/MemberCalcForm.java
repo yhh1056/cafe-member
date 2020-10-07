@@ -1,9 +1,12 @@
 package cafeorder.web;
 
+import cafeorder.domain.Time;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * author {yhh1056}
@@ -29,4 +32,13 @@ public class MemberCalcForm {
     @NotNull
     private int hourlyWage;
 
+    public int[] createTimeListForm() {
+        int[] times = new int[5];
+        times[0] = time1;
+        times[1] = time2;
+        times[2] = time3;
+        times[3] = time4;
+        times[4] = time5;
+        return times;
+    }
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,15 +60,8 @@ public class MemberController {
     @PostMapping("/member/calc")
     public String calc(MemberCalcForm form) {
         String name = form.getName();
-        List<Integer> times = new ArrayList<>();
-        times.add(form.getTime1());
-        times.add(form.getTime2());
-        times.add(form.getTime3());
-        times.add(form.getTime4());
-        times.add(form.getTime5());
-
         int hourlyWage = form.getHourlyWage();
-        memberService.addTime(name, times, hourlyWage);
+        memberService.addTime(name, hourlyWage, form);
 
         return "redirect:/";
     }
