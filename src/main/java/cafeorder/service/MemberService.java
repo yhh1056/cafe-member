@@ -38,11 +38,11 @@ public class MemberService {
     }
 
     @Transactional
-    public void addTime(String name, int weekTime, int hourlyWage) {
+    public void addTime(String name, List<Integer> times, int hourlyWage) {
         List<Member> members = memberRepository.findAll();
         for (Member member : members) {
             if (member.equals(name)) {
-                member.addTime(weekTime, hourlyWage);
+                member.addTime(times, hourlyWage);
                 memberRepository.save(member);
             }
         }

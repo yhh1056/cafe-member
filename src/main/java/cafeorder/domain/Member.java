@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.List;
 
 /**
  * author {yhh1056}
@@ -25,7 +26,11 @@ public class Member {
     @Column(name = "member_name")
     private String name;
 
-    private int time;
+    private int time1;
+    private int time2;
+    private int time3;
+    private int time4;
+    private int time5;
 
     private int hourlyWage;
 
@@ -33,16 +38,20 @@ public class Member {
         this.name = name;
     }
 
-    public int totalWage() {
-        return hourlyWage * time;
-    }
+//    public int totalWage() {
+//        return hourlyWage * time;
+//    }
 
     public boolean equals(String name) {
         return this.name.equals(name);
     }
 
-    public void addTime(int weekTime, int hourlyWage){
-        this.time = weekTime;
+    public void addTime(List<Integer> times, int hourlyWage){
+        this.time1 = times.get(0);
+        this.time2 = times.get(1);
+        this.time3 = times.get(2);
+        this.time4 = times.get(3);
+        this.time5 = times.get(4);
         this.hourlyWage = hourlyWage;
     }
 }

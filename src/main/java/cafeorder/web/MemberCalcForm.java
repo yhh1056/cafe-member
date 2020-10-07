@@ -16,8 +16,15 @@ public class MemberCalcForm {
 
     private String name;
 
-    @NotNull
-    private int time;
+    private int time1;
+
+    private int time2;
+
+    private int time3;
+
+    private int time4;
+
+    private int time5;
 
     @NotNull
     private int hourlyWage;
