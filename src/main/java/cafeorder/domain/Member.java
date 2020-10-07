@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * author {yhh1056}
@@ -48,12 +46,32 @@ public class Member {
     }
 
     public void calcWage() {
-        oneWeekWage = time.getOneWeekTime() * time.getHourlyWage();
-        twoWeekWage = time.getTwoWeekTime() * time.getHourlyWage();
-        threeWeekWage = time.getThreeWeekTime() * time.getHourlyWage();
-        fourWeekWage = time.getFourWeekTime() * time.getHourlyWage();
-        fiveWeekWage = time.getFiveWeekTime() * time.getHourlyWage();
+        oneWeekWage = calcOneWeek(time.getOneWeekTime(), time.getHourlyWage());
+        twoWeekWage = calcOneWeek(time.getTwoWeekTime(), time.getHourlyWage());
+        threeWeekWage = calcOneWeek(time.getThreeWeekTime(), time.getHourlyWage());
+        fourWeekWage = calcOneWeek(time.getFourWeekTime(), time.getHourlyWage());
+        fiveWeekWage = calcOneWeek(time.getFiveWeekTime(), time.getHourlyWage());
 
         totalWage = oneWeekWage + twoWeekWage + threeWeekWage + fourWeekWage + fiveWeekWage;
+    }
+
+    private int calcOneWeek(int weekTime, int hourlyWage) {
+        if (weekTime >= 15) {
+            return calcVacationWage(weekTime, hourlyWage);
+        }
+        return calcWage(weekTime, hourlyWage);
+
+    }
+
+    private int calcVacationWage(int weekTime, int hourlyWage) {
+        return weekTime * calcVacationPay(hourlyWage);
+    }
+
+    private int calcWage(int weekTime, int hourlyWage) {
+        return weekTime * hourlyWage;
+    }
+
+    private int calcVacationPay(int hourlyWage) {
+        return (int) (hourlyWage * 1.2);
     }
 }
