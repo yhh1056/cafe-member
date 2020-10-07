@@ -31,22 +31,41 @@ public class Member {
     private int time3;
     private int time4;
     private int time5;
-
     private int hourlyWage;
 
     public Member(String name) {
         this.name = name;
     }
 
-//    public int totalWage() {
-//        return hourlyWage * time;
-//    }
+    public int week1Wage() {
+        return hourlyWage * time1;
+    }
 
+    public int week2Wage() {
+        return hourlyWage * time2;
+    }
+
+    public int week3Wage() {
+        return hourlyWage * time3;
+    }
+
+    public int week4Wage() {
+        return hourlyWage * time4;
+    }
+
+    public int week5Wage() {
+        return hourlyWage * time5;
+    }
+
+    public int totalWage() {
+        int total = time1 + time2 + time3 + time4 + time5;
+        return total * hourlyWage;
+    }
     public boolean equals(String name) {
         return this.name.equals(name);
     }
 
-    public void addTime(List<Integer> times, int hourlyWage){
+    public void addTime(List<Integer> times, int hourlyWage) {
         this.time1 = times.get(0);
         this.time2 = times.get(1);
         this.time3 = times.get(2);
