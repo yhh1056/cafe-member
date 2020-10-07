@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 /**
@@ -25,10 +27,24 @@ public class Time {
     @OneToOne(mappedBy = "time", cascade = CascadeType.ALL)
     private Member member;
 
+    @Max(100)
+    @Min(0)
     private int oneWeekTime;
+
+    @Max(100)
+    @Min(0)
     private int twoWeekTime;
+
+    @Max(100)
+    @Min(0)
     private int ThreeWeekTime;
+
+    @Max(100)
+    @Min(0)
     private int FourWeekTime;
+
+    @Max(100)
+    @Min(0)
     private int FiveWeekTime;
 
     private int hourlyWage;

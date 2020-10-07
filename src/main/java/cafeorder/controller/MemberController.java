@@ -45,6 +45,19 @@ public class MemberController {
         return "redirect:/";
     }
 
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.getAll();
+        model.addAttribute("members", members);
+        for (Member m : members) {
+            if (m.getTime() == null) {
+                return "redirect:/";
+            }
+        }
+
+        return "/member/list";
+    }
+
     /**
      * DTO로 바꿀것
      */
@@ -67,7 +80,7 @@ public class MemberController {
     }
 
     @GetMapping("/member/members")
-    public String list(Model model) {
+    public String calcAll(Model model) {
         List<Member> members = memberService.getAll();
 
         model.addAttribute("members", members);
