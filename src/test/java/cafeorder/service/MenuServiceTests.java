@@ -1,6 +1,5 @@
 package cafeorder.service;
 
-import cafeorder.domain.Menu;
 import cafeorder.domain.MenuType;
 import cafeorder.repository.MenuRepository;
 import org.junit.jupiter.api.DisplayName;

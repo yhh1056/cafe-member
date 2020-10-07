@@ -1,7 +1,6 @@
 package cafeorder.repository;
 
 import cafeorder.domain.Member;
-import cafeorder.domain.Menu;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
