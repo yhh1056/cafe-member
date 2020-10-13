@@ -2,6 +2,7 @@ package cafeorder.controller;
 
 import cafeorder.domain.Member;
 import cafeorder.dto.MemberDto;
+import cafeorder.dto.MembersDto;
 import cafeorder.service.MemberService;
 import cafeorder.web.MemberCalcForm;
 import cafeorder.web.MemberForm;
@@ -9,8 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -54,7 +54,6 @@ public class MemberController {
                 return "redirect:/";
             }
         }
-
         return "/member/list";
     }
 
@@ -63,20 +62,19 @@ public class MemberController {
      */
     @GetMapping("/member/calc")
     public String input(Model model) {
-        List<Member> list = memberService.getAll();
-        model.addAttribute("members", list);
+        MembersDto dto = new MembersDto(memberService.getAll());
         model.addAttribute("memberCalcForm", new MemberCalcForm());
+        model.addAttribute("members", dto.getMembers());
 
         return "/member/createCalcMemberForm";
     }
 
     @PostMapping("/member/calc")
-    public String calc(MemberCalcForm form) {
-        String name = form.getName();
-        int hourlyWage = form.getHourlyWage();
-        memberService.addTime(name, hourlyWage, form);
+    public String calc(@ModelAttribute("memberCalcForm") MemberCalcForm form,
+                       @RequestParam("memberId") Long id) {
+        memberService.addTime(id, form.createTimeListForm());
 
-        return "redirect:/";
+        return "/member/calcOk";
     }
 
     @GetMapping("/member/members")

@@ -1,54 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <style>
-    .fieldError {
-        border-color: #bd2130;
-    } </style>
+    th, tr, td {
+        border: solid 1px #000;
+    }
+
+    .center-text {
+        text-align: center;
+    }
+</style>
 <meta charset="UTF-8">
 
 <body>
-<h2>시급과 주간 근무시간을 입력해주세요</h2>
+<h2 style="text-align: center;margin-bottom: 6%;">시급과 주간 근무시간을 입력해주세요</h2>
 
-<form action="/member/calc" method="post" th:object="${memberCalcForm}">
+<div th:each="member : ${members}" style="margin : 0 auto; width: 720px">
+    <form name="calcForm" action="/member/calc" method="post" th:object="${memberCalcForm}">
+<!--        <div style="margin : 0 auto; width: 720px">-->
+            <input type="hidden" th:name="memberId" th:value="${member.id}">
+            <!--            <input type="hidden" th:field="*{memberId}" th:value="${member.id}"/>-->
+            <table border="1" style="display: inline-block; border-collapse: collapse; margin: 5px;">
+                <th>주차 / 이름</th>
+                <th th:text="${member.name}">
+                    <tr>
+                        <td style="text-align: center;">1주차</td>
+                        <td>
+                            <label th:for="time1"></label>
+                            <input type="number" th:field="*{time1}" align="right"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">2주차</td>
+                        <td>
+                            <label th:for="time2"></label>
+                            <input type="number" th:field="*{time2}" align="right"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">3주차</td>
+                        <td>
+                            <label th:for="time3"></label>
+                            <input type="number" th:field="*{time3}" align="right"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">4주차</td>
+                        <td>
+                            <label th:for="time4"></label>
+                            <input type="number" th:field="*{time4}" align="right"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">5주차</td>
+                        <td>
+                            <label th:for="time5"></label>
+                            <input type="number" th:field="*{time5}" align="right"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input style="width: 100%;" class="submit-button" type="submit" value="계산하기"/>
+                    </tr>
+                </th>
+                <!--        <p>-->
+                <!--            <label th:for="weekTime">시급</label>-->
+                <!--            <input type="text" th:field="*{hourlyWage}" align="right"/>-->
+                <!--        </p>-->
 
-    <div th:object="${memberCalcForm}">
-        <select th:field="*{name}" name="members">
-            <option value="">직원 선택</option>
-            <option th:each="member : ${members}"
-                    th:value="${member.name}"
-                    th:text="${member.name}">
-            </option>
-        </select>
-        주휴선택
-    </div>
-    <p>
-        <label th:for="weekTime">1주차</label>
-        <input type="text" th:field="*{time1}" align="right"/>
-    </p>
-    <p>
-        <label th:for="weekTime">2주차</label>
-        <input type="text" th:field="*{time2}" align="right"/>
-    </p>
-    <p>
-        <label th:for="weekTime">3주차</label>
-        <input type="text" th:field="*{time3}" align="right"/>
-    </p>
-    <p>
-        <label th:for="weekTime">4주차</label>
-        <input type="text" th:field="*{time4}" align="right"/>
-    </p>
-    <p>
-        <label th:for="weekTime">5주차</label>
-        <input type="text" th:field="*{time5}" align="right"/>
-    </p>
-    <p>
-        <label th:for="weekTime">시급</label>
-        <input type="text" th:field="*{hourlyWage}" align="right"/>
-    </p>
-    <p>
-        <input type="submit" value="계산하기"/>
-    </p>
+            </table>
+        </div>
+    </form>
+</div>
 
-</form>
 </body>
 </html>

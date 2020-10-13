@@ -1,11 +1,9 @@
 package cafeorder.web;
 
-import cafeorder.domain.Time;
+import cafeorder.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 public class MemberCalcForm {
+    private Long memberId;
 
     private String name;
 
@@ -29,7 +28,7 @@ public class MemberCalcForm {
 
     private int time5;
 
-    @NotNull
+//    @NotNull
     private int hourlyWage;
 
     public int[] createTimeListForm() {
@@ -41,4 +40,5 @@ public class MemberCalcForm {
         times[4] = time5;
         return times;
     }
+
 }

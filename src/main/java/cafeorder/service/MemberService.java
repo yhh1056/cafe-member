@@ -3,7 +3,6 @@ package cafeorder.service;
 import cafeorder.domain.Member;
 import cafeorder.domain.Time;
 import cafeorder.repository.MemberRepository;
-import cafeorder.web.MemberCalcForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,13 +23,13 @@ public class MemberService {
 
     @Transactional
     public void add(Member member) {
-        isExisted(member);
+        isExisted(member.getName());
         memberRepository.save(member);
     }
 
-    private void isExisted(Member member) {
-        List<Member> findMember = memberRepository.findByName(member.getName());
-        if (member.equals(findMember)) {
+    private void isExisted(String name) {
+        List<Member> members = memberRepository.findByName(name);
+        if (name.equals(members)) {
             throw new IllegalArgumentException("같은 이름의 직원이 존재합니다");
         }
     }
@@ -40,17 +39,20 @@ public class MemberService {
     }
 
     @Transactional
-    public void addTime(String name, int hourlyWage, MemberCalcForm form) {
-        Member member = getFindNameMember(name);
-        if (member.getTime() == null) {
-            Time time = new Time(form.createTimeListForm(), hourlyWage);
-            member.addTimeInfo(time);
-        } else {
-            Time time = member.getTime();
-            time.changeInfo(form.createTimeListForm(), hourlyWage);
-        }
+    public void addTime(Long id, int[] times) {
+        Member member = memberRepository.findById(id);
+        isExistedTime(times, member);
+        member.addTimeInfo(new Time(times, 8590));
         member.calcWage();
+
         memberRepository.save(member);
+    }
+
+    private void isExistedTime(int[] times, Member member) {
+        if (member.getTime() != null) {
+            Time time = member.getTime();
+            time.changeInfo(times, 8590);
+        }
     }
 
     private Member getFindNameMember(String name) {

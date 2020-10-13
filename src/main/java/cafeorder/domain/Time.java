@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -29,22 +30,27 @@ public class Time {
 
     @Max(100)
     @Min(0)
+    @NotNull
     private int oneWeekTime;
 
     @Max(100)
     @Min(0)
+    @NotNull
     private int twoWeekTime;
 
     @Max(100)
     @Min(0)
+    @NotNull
     private int ThreeWeekTime;
 
     @Max(100)
     @Min(0)
+    @NotNull
     private int FourWeekTime;
 
     @Max(100)
     @Min(0)
+    @NotNull
     private int FiveWeekTime;
 
     private int hourlyWage;
