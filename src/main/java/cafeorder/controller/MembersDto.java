@@ -1,4 +1,4 @@
-package cafeorder.dto;
+package cafeorder.controller;
 
 import cafeorder.domain.Member;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * author {yhh1056}
- * Create by {2020/10/12}
+ * Create by {2020/10/13}
  */
 @Getter
 @Setter

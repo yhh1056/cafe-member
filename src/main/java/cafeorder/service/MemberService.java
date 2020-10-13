@@ -45,6 +45,7 @@ public class MemberService {
     @Transactional
     public void addTime(Long id, int[] times) {
         Member member = memberRepository.findById(id);
+        isExistedTime(times, member);
         member.calcWage();
 
         memberRepository.save(member);

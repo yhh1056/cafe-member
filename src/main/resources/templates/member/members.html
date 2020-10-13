@@ -4,29 +4,31 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-<h2>월급 현황입니다</h2>
+<div style="text-align: center;">
+    <body>
+    <h2>월급 현황입니다</h2>
 
-<table border="1">
-    <th>번호</th>
-    <th>이름</th>
-    <th>1주차</th>
-    <th>2주차</th>
-    <th>3주차</th>
-    <th>4주차</th>
-    <th>5주차</th>
-    <th>월급</th>
-    <tr th:each="member : ${members}">
-        <td th:text="${memberStat.count}"></td>
-        <td th:text="${member.name}"></td>
-        <td th:text="${member.oneWeekWage}"></td>
-        <td th:text="${member.twoWeekWage}"></td>
-        <td th:text="${member.threeWeekWage}"></td>
-        <td th:text="${member.fourWeekWage}"></td>
-        <td th:text="${member.fiveWeekWage}"></td>
-        <td th:text="${member.totalWage}"></td>
-    </tr>
-</table>
+    <table border="1" style="display: inline-block; border-collapse: collapse; margin: 5px;">
+        <th>번호</th>
+        <th>이름</th>
+        <th>1주차</th>
+        <th>2주차</th>
+        <th>3주차</th>
+        <th>4주차</th>
+        <th>5주차</th>
+        <th>월급</th>
+        <tr th:each="member : ${membersDto}">
+            <td th:text="${memberStat.count}"></td>
+            <td th:text="${member.name}"></td>
+            <td th:text="${member.wage1}"></td>
+            <td th:text="${member.wage2}"></td>
+            <td th:text="${member.wage3}"></td>
+            <td th:text="${member.wage4}"></td>
+            <td th:text="${member.wage5}"></td>
+            <td th:text="${member.total}"></td>
+        </tr>
+    </table>
 
-</body>
+    </body>
+</div>
 </html>
