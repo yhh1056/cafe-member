@@ -27,6 +27,10 @@ public class MemberService {
         memberRepository.save(member);
     }
 
+    /**
+     * todo : 리팩토링
+     * @param name
+     */
     private void isExisted(String name) {
         List<Member> members = memberRepository.findByName(name);
         if (name.equals(members)) {
@@ -41,8 +45,6 @@ public class MemberService {
     @Transactional
     public void addTime(Long id, int[] times) {
         Member member = memberRepository.findById(id);
-        isExistedTime(times, member);
-        member.addTimeInfo(new Time(times, 8590));
         member.calcWage();
 
         memberRepository.save(member);
@@ -52,6 +54,8 @@ public class MemberService {
         if (member.getTime() != null) {
             Time time = member.getTime();
             time.changeInfo(times, 8590);
+        } else {
+            member.addTimeInfo(new Time(times, 8590));
         }
     }
 
