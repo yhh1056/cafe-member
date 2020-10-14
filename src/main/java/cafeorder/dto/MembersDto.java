@@ -1,4 +1,4 @@
-package cafeorder.controller;
+package cafeorder.dto;
 
 import cafeorder.domain.Member;
 import lombok.Getter;

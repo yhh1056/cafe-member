@@ -3,8 +3,10 @@ package cafeorder.controller;
 import cafeorder.domain.Member;
 import cafeorder.dto.MemberDto;
 import cafeorder.dto.MemberListDto;
+import cafeorder.dto.MembersDto;
+import cafeorder.dto.TotalDto;
 import cafeorder.service.MemberService;
-import cafeorder.web.MemberCalcForm;
+import cafeorder.web.CalcForm;
 import cafeorder.web.MemberForm;
 import cafeorder.web.MembersForm;
 import lombok.RequiredArgsConstructor;
@@ -90,21 +92,26 @@ public class MemberController {
         return "/member/list";
     }
 
-    /**
-     * DTO로 바꿀것
-     */
     @GetMapping("/member/calc")
-    public String input(Model model) {
+    public String calcForm(Model model) {
         MembersDto dto = new MembersDto(memberService.getAll());
-        model.addAttribute("memberCalcForm", new MemberCalcForm());
         model.addAttribute("members", dto.getMembers());
+        model.addAttribute("calcForm", new CalcForm());
 
-        return "/member/createCalcMemberForm";
+        return "/member/createCalcForm";
     }
 
+    /**
+     * TOdo : 뷰에서 예외 처리
+     * 에러페이지 추가
+     */
     @PostMapping("/member/calc")
-    public String calc(@ModelAttribute("memberCalcForm") MemberCalcForm form,
-                       @RequestParam("memberId") Long id) {
+    public String calc(@Valid CalcForm form,
+                       @RequestParam("memberId") Long id,
+                       BindingResult result) {
+        if (result.hasErrors()) {
+            return "/member/createCalcForm";
+        }
         memberService.addTime(id, form.createTimeListForm());
 
         return "redirect:/";
@@ -112,14 +119,20 @@ public class MemberController {
 
     @GetMapping("/member/members")
     public String calcAll(Model model) {
-        List<Member> members = memberService.getAll();
-        List<MemberListDto> membersDto = new ArrayList<>();
-        for (Member member : members) {
-            membersDto.add(new MemberListDto(member));
-        }
+        List<MemberListDto> membersDto = getMemberListDto();
+        TotalDto dto = new TotalDto(memberService.getTotal());
 
         model.addAttribute("membersDto", membersDto);
+        model.addAttribute("total", dto.getTotal());
 
         return "/member/members";
+    }
+
+    private List<MemberListDto> getMemberListDto() {
+        List<MemberListDto> membersDto = new ArrayList<>();
+        for (Member member : memberService.getAll()) {
+            membersDto.add(new MemberListDto(member));
+        }
+        return membersDto;
     }
 }
