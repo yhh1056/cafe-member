@@ -2,10 +2,11 @@ package cafeorder.controller;
 
 import cafeorder.domain.Member;
 import cafeorder.dto.MemberDto;
-import cafeorder.dto.MembersDto;
+import cafeorder.dto.MemberListDto;
 import cafeorder.service.MemberService;
 import cafeorder.web.MemberCalcForm;
 import cafeorder.web.MemberForm;
+import cafeorder.web.MembersForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,12 +39,37 @@ public class MemberController {
         if (result.hasErrors()) {
             return "/member/createMemberForm";
         }
-        MemberDto dto = new MemberDto();
-        dto.setName(form.getName());
-
-        memberService.add(dto.toEntity());
+        MemberDto dto = new MemberDto(form.getName());
+        memberService.add(dto.createMember());
 
         return "redirect:/";
+    }
+
+    @GetMapping("/members/management")
+    public String updateForm(Model model) {
+        MembersForm members = new MembersForm(memberService.getAll());
+        model.addAttribute("members", members.getMembers());
+
+        return "/member/listForm";
+    }
+
+    @GetMapping("/members/member/{id}")
+    public String updateMemberForm(@PathVariable("id") Long id, Model model) {
+        MemberForm form = new MemberForm();
+        form.addInfo(memberService.findOne(id));
+        model.addAttribute("form", form);
+        return "/member/updateForm";
+    }
+
+    @PostMapping("/members/member/{id}")
+    public String updateMember(@PathVariable("id") Long id,
+                               @Valid MemberForm form,
+                               BindingResult result) {
+        if (result.hasErrors()) {
+            return "/member/createMemberForm";
+        }
+        memberService.updateMember(form);
+        return "redirect:/members";
     }
 
     @GetMapping("/members")
@@ -74,14 +101,18 @@ public class MemberController {
                        @RequestParam("memberId") Long id) {
         memberService.addTime(id, form.createTimeListForm());
 
-        return "/member/calcOk";
+        return "redirect:/";
     }
 
     @GetMapping("/member/members")
     public String calcAll(Model model) {
         List<Member> members = memberService.getAll();
+        List<MemberListDto> membersDto = new ArrayList<>();
+        for (Member member : members) {
+            membersDto.add(new MemberListDto(member));
+        }
 
-        model.addAttribute("members", members);
+        model.addAttribute("membersDto", membersDto);
 
         return "/member/members";
     }

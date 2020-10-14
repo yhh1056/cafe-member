@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        thead {
+            background : #c8c8c8;
+        }
+        td {
+            padding: 10px 10px 10px 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div style="text-align: center;">
+    <h2>직원 목록</h2>
+
+    <table border="1" style="display: inline-block; border-collapse: collapse; margin: 5px;">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>이름</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${memberStat.count}"></td>
+            <td th:text="${member.name}"></td>
+            <td>
+                <a href="#" th:href="@{/members/member/{id} (id=${member.id})}">수정</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

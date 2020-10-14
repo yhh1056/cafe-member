@@ -3,6 +3,7 @@ package cafeorder.service;
 import cafeorder.domain.Member;
 import cafeorder.domain.Time;
 import cafeorder.repository.MemberRepository;
+import cafeorder.web.MemberForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,10 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+
+    public Member findOne(Long id) {
+        return memberRepository.findById(id);
+    }
 
     @Transactional
     public void add(Member member) {
@@ -66,5 +71,13 @@ public class MemberService {
             }
         }
         throw new IllegalStateException("존재하지 않는 직원입니다.");
+    }
+
+    @Transactional
+    public void updateMember(MemberForm form) {
+        Member member = memberRepository.findById(form.getId());
+        member.updateInfo(form.getName());
+
+        memberRepository.save(member);
     }
 }

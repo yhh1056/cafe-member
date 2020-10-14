@@ -41,6 +41,10 @@ public class Member {
         this.time = time;
     }
 
+    public void updateInfo(String name) {
+        this.name = name;
+    }
+
     public boolean equals(String name) {
         return this.name.equals(name);
     }

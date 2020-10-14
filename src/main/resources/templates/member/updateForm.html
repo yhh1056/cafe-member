@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+
+    body {
+        background-color: #f5f5f5;
+    }
+
+    .in-line {
+        width: 200px;
+        height: 40px;
+        margin: 0 auto;
+        text-align: center
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    input {
+        display: inline-block;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        height: 100%;
+        border: none;
+        font-size: 1em;
+        padding-left: 5px;
+        font-style: oblique;
+        outline: none;
+        box-sizing: border-box;
+        color: black;
+    }
+
+    input[type=submit] {
+        width: 30%;
+        height: 100%;
+        margin-right:39%;
+        background-color: lightgray;
+        border: none;
+        background-color: white;
+        font-size: 1em;
+        color: #042AaC;
+        outline: none;
+        display: inline-block;
+        margin-left: -10px;
+        box-sizing: border-box;
+    }
+    input[type=button] {
+        width: 30%;
+        height: 100%;
+        margin-right: 0%;
+        background-color: lightgray;
+        border: none;
+        background-color: white;
+        font-size: 1em;
+        color: #042AaC;
+        outline: none;
+        display: inline-block;
+        margin-left: -10px;
+        box-sizing: border-box;
+
+    }
+
+    input[type=button]:hover {
+        background-color: lightgray;
+        display: inline-block;
+    }
+
+
+</style>
+<meta charset="UTF-8">
+
+<div style="text-align: center;">
+    <body>
+    <h2>직원 등록</h2>
+
+        <form method="post" th:object="${form}">
+            <div class="container">
+                <div class="in-line">
+                    <input type="text" th:field="*{name}" align="right" placeholder="수정할 이름 입력"
+                           th:class="${#fields.hasErrors('name')}?
+                   'form-control fieldError' : 'form-control'"/>
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</p>
+                    <input type="submit" value="수정">
+                    <input type="button" value="뒤로가기" onclick="history.back();">
+                </div>
+            </div>
+        </form>
+
+
+    </body>
+</div>
+</html>
