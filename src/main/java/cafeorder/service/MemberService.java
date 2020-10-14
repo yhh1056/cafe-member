@@ -27,14 +27,12 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    /**
-     * todo : 리팩토링
-     * @param name
-     */
     private void isExisted(String name) {
         List<Member> members = memberRepository.findByName(name);
-        if (name.equals(members)) {
-            throw new IllegalArgumentException("같은 이름의 직원이 존재합니다");
+        for (Member member : members) {
+            if (member.equals(name)) {
+                throw new IllegalArgumentException("같은 이름의 직원이 존재합니다");
+            }
         }
     }
 

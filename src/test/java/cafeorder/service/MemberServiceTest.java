@@ -11,8 +11,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
 
 /**
  * author {yhh1056}
@@ -25,36 +28,26 @@ class MemberServiceTest {
     @InjectMocks
     MemberService memberService;
     @Mock
-    MemberRepository repository;
+    MemberRepository memberRepository;
 
     @BeforeEach
     void setUp() {
+        mockRepository();
+    }
+
+    private void mockRepository() {
+        List<Member> members = new ArrayList<>();
+        members.add(new Member("testName1"));
+        members.add(new Member("testName2"));
+
+        given(memberRepository.findAll()).willReturn(members);
 
     }
 
     @Test
-    @DisplayName("직원 등록")
-    void add() {
-        Member member = new Member("직원1");
-        memberService.add(member);
-
-//        when(repository.save(any())).
-
-        assertEquals(member, repository.findById(1L));
+    @DisplayName("")
+    void getAll() {
+        assertEquals(2, memberService.getAll().size());
     }
 
-    @Test
-    @DisplayName("직원 등록")
-    void isExistedName() {
-        Member member = new Member("직원1");
-        memberService.add(member);
-
-        assertThrows(IllegalStateException.class, () -> memberService.add(member));
-    }
-
-//    @Test
-//    void timeDto() {
-//        List<Member> members = memberService.getAll();
-//        TimeDto dto = new TimeDto(members);
-//    }
 }

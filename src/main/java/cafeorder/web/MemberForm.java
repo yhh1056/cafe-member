@@ -18,14 +18,4 @@ public class MemberForm {
 
     @NotEmpty(message = "필수 입력 항목입니다")
     private String name;
-
-    private int time1;
-
-    private int time2;
-
-    private int time3;
-
-    private int time4;
-
-    private int time5;
 }

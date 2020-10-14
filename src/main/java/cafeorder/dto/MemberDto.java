@@ -13,12 +13,15 @@ import javax.validation.constraints.NotEmpty;
  */
 
 @Getter
-@Setter
 @NoArgsConstructor
 public class MemberDto {
 
     @NotEmpty(message = "이름은 반드시 존재해야 합니다.")
     private String name;
+
+    public MemberDto(String name) {
+        this.name = name;
+    }
 
     public Member toEntity() {
         return new Member(name);

@@ -20,17 +20,16 @@ class MemberTest {
 
         assertTrue(member.equals(name));
     }
-//
-//    @Test
-//    @DisplayName("시간 추가")
-//    void addTime() {
-//        String name = "디노";
-//
-//        Member member = new Member("디노");
-//
-//        member.addTimeInfo(30);
-//
-//        assertEquals(30, member.getTime().getWeekTime());
-//    }
 
+    @Test
+    @DisplayName("시간 추가")
+    void addTime() {
+        Member member = new Member("디노");
+        int[] times = new int[]{10, 10, 10, 10, 10};
+        int hourWage = 8590;
+
+        member.addTimeInfo(new Time(times, hourWage));
+
+        assertEquals(10, member.getTime().getOneWeekTime());
+    }
 }
