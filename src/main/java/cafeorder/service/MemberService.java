@@ -86,4 +86,17 @@ public class MemberService {
         Member member = memberRepository.findById(id);
         memberRepository.delete(member);
     }
+
+    public int getTotal() {
+        List<Member> members = memberRepository.findAll();
+        return calcTotal(members);
+    }
+
+    private int calcTotal(List<Member> members) {
+        int total = 0;
+        for (Member member : members) {
+            total += member.getTotalWage();
+        }
+        return total;
+    }
 }
