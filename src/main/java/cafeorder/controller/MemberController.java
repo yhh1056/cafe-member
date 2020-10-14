@@ -63,14 +63,14 @@ public class MemberController {
         return "/member/updateForm";
     }
 
-    @PostMapping("/members/member/{id}/update")
-    public String updateMember(@PathVariable("id") Long id,
-                               @Valid MemberForm form,
-                               BindingResult result) {
+    @PostMapping("/members/update")
+    public String updateMember(@Valid MemberForm form,
+                               BindingResult result,
+                               @RequestParam("memberId") Long id) {
         if (result.hasErrors()) {
             return "/member/createMemberForm";
         }
-        memberService.updateMember(form);
+        memberService.updateMember(id, form);
         return "redirect:/members";
     }
 
@@ -90,49 +90,5 @@ public class MemberController {
             }
         }
         return "/member/list";
-    }
-
-    @GetMapping("/member/calc")
-    public String calcForm(Model model) {
-        MembersDto dto = new MembersDto(memberService.getAll());
-        model.addAttribute("members", dto.getMembers());
-        model.addAttribute("calcForm", new CalcForm());
-
-        return "/member/createCalcForm";
-    }
-
-    /**
-     * TOdo : 뷰에서 예외 처리
-     * 에러페이지 추가
-     */
-    @PostMapping("/member/calc")
-    public String calc(@Valid CalcForm form,
-                       @RequestParam("memberId") Long id,
-                       BindingResult result) {
-        if (result.hasErrors()) {
-            return "/member/createCalcForm";
-        }
-        memberService.addTime(id, form.createTimeListForm());
-
-        return "redirect:/";
-    }
-
-    @GetMapping("/member/members")
-    public String calcAll(Model model) {
-        List<MemberListDto> membersDto = getMemberListDto();
-        TotalDto dto = new TotalDto(memberService.getTotal());
-
-        model.addAttribute("membersDto", membersDto);
-        model.addAttribute("total", dto.getTotal());
-
-        return "/member/members";
-    }
-
-    private List<MemberListDto> getMemberListDto() {
-        List<MemberListDto> membersDto = new ArrayList<>();
-        for (Member member : memberService.getAll()) {
-            membersDto.add(new MemberListDto(member));
-        }
-        return membersDto;
     }
 }

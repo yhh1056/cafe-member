@@ -74,8 +74,8 @@ public class MemberService {
     }
 
     @Transactional
-    public void updateMember(MemberForm form) {
-        Member member = memberRepository.findById(form.getId());
+    public void updateMember(Long id, MemberForm form) {
+        Member member = memberRepository.findById(id);
         member.updateInfo(form.getName());
 
         memberRepository.save(member);
