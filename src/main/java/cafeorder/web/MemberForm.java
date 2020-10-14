@@ -2,8 +2,10 @@ package cafeorder.web;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 /**
  * author {yhh1056}
@@ -16,6 +18,8 @@ public class MemberForm {
 
     private Long id;
 
-    @NotEmpty(message = "필수 입력 항목입니다")
+    @NotBlank(message = "필수 입력 항목입니다")
+    @Length(max = 7, message = "이름은 7글자 이내로 등록이 가능합니다.")
+    @Pattern(regexp = "^[a-zA-Z가-힣]*$", message = "특수문자는 허용하지 않습니다.")
     private String name;
 }

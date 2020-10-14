@@ -3,7 +3,6 @@ package cafeorder.dto;
 import cafeorder.domain.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -20,10 +19,10 @@ public class MemberDto {
     private String name;
 
     public MemberDto(String name) {
-        this.name = name;
+        this.name = name.trim();
     }
 
-    public Member toEntity() {
+    public Member createMember() {
         return new Member(name);
     }
 }
