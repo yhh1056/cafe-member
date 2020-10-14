@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<link rel="stylesheet" href="/css/home.css"/>
 <head>
+    <script src="https://kit.fontawesome.com/01dfb9b9dd.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<div style="text-align: center;">
-    <body>
-    <h2> 기본 페이지입니다.</h2>
 
-    <p>
-        <button type="button" onclick="location.href='/member/new'">직원 등록</button>
-    </p>
-    <p>
-        <button type="button" onclick="location.href='/members/management'">직원 관리</button>
-    </p>
-    <p>
-        <button type="button" onclick="location.href='/member/calc'">시급 계산</button>
-    </p>
-    <p>
-        <button type="button" onclick="location.href='/member/members'">월급 확인</button>
-    </p>
-    </body>
+<body>
+<div style="text-align: center;">
+    <div class="title">커피홀 창동점</div>
+    <div class="container">
+        <div class="top">
+            <button class="topButton" type="button" onclick="location.href='/member/new'">
+                <i class="fas fa-user-friends"></i>
+                <span class="btn">직원 등록</span>
+            </button>
+            <button class="topButton" type="button" onclick="location.href='/members/management'">
+                <i class="fas fa-user-cog"></i>
+                <span class="btn">직원 관리</span>
+            </button>
+        </div>
+        <div>
+            <button class="bottomButton" type="button" onclick="location.href='/member/calc'">
+                <i class="fas fa-calculator"></i>
+                <span class="btn"> 시급 계산</span>
+            </button>
+            <button class="bottomButton" type="button" onclick="location.href='/member/members'">
+                <i class="fas fa-user-check"></i>
+                <span class="btn">월급 확인</span>
+            </button>
+        </div>
+    </div>
 </div>
+</body>
 </html>
