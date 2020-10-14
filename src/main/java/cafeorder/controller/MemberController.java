@@ -53,7 +53,7 @@ public class MemberController {
         return "/member/listForm";
     }
 
-    @GetMapping("/members/member/{id}")
+    @GetMapping("/members/member/{id}/update")
     public String updateMemberForm(@PathVariable("id") Long id, Model model) {
         MemberForm form = new MemberForm();
         form.addInfo(memberService.findOne(id));
@@ -61,7 +61,7 @@ public class MemberController {
         return "/member/updateForm";
     }
 
-    @PostMapping("/members/member/{id}")
+    @PostMapping("/members/member/{id}/update")
     public String updateMember(@PathVariable("id") Long id,
                                @Valid MemberForm form,
                                BindingResult result) {
@@ -69,6 +69,12 @@ public class MemberController {
             return "/member/createMemberForm";
         }
         memberService.updateMember(form);
+        return "redirect:/members";
+    }
+
+    @GetMapping("/members/member/{id}/delete")
+    public String deleteMember(@PathVariable("id") Long id) {
+        memberService.delete(id);
         return "redirect:/members";
     }
 

@@ -23,7 +23,8 @@
         <tr>
             <th>#</th>
             <th>이름</th>
-            <th></th>
+            <th>수정</th>
+            <th>삭제</th>
         </tr>
         </thead>
         <tbody>
@@ -31,7 +32,10 @@
             <td th:text="${memberStat.count}"></td>
             <td th:text="${member.name}"></td>
             <td>
-                <a href="#" th:href="@{/members/member/{id} (id=${member.id})}">수정</a>
+                <a href="#" th:href="@{/members/member/{id}/update (id=${member.id})}">수정</a>
+            </td>
+            <td>
+                <a href="#" th:href="@{/members/member/{id}/delete (id=${member.id})}">삭제</a>
             </td>
         </tr>
         </tbody>

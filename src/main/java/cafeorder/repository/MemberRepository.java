@@ -34,4 +34,8 @@ public class MemberRepository {
     public List<Member> findAll() {
         return em.createQuery("SELECT m FROM Member m", Member.class).getResultList();
     }
+
+    public void delete(Member member) {
+        em.remove(member);
+    }
 }

@@ -80,4 +80,10 @@ public class MemberService {
 
         memberRepository.save(member);
     }
+
+    @Transactional
+    public void delete(Long id) {
+        Member member = memberRepository.findById(id);
+        memberRepository.delete(member);
+    }
 }
