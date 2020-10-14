@@ -28,29 +28,10 @@ public class Time {
     @OneToOne(mappedBy = "time", cascade = CascadeType.ALL)
     private Member member;
 
-    @Max(100)
-    @Min(0)
-    @NotNull
     private int oneWeekTime;
-
-    @Max(100)
-    @Min(0)
-    @NotNull
     private int twoWeekTime;
-
-    @Max(100)
-    @Min(0)
-    @NotNull
     private int ThreeWeekTime;
-
-    @Max(100)
-    @Min(0)
-    @NotNull
     private int FourWeekTime;
-
-    @Max(100)
-    @Min(0)
-    @NotNull
     private int FiveWeekTime;
 
     private int hourlyWage;
@@ -72,5 +53,4 @@ public class Time {
         FiveWeekTime = timeListForm[4];
         this.hourlyWage = hourlyWage;
     }
-
 }
