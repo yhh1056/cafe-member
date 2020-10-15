@@ -71,7 +71,7 @@ public class MemberController {
             return "/member/createMemberForm";
         }
         memberService.updateMember(id, form);
-        return "redirect:/members";
+        return "redirect:/";
     }
 
     @GetMapping("/members/member/{id}/delete")
