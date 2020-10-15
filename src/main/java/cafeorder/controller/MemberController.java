@@ -71,24 +71,12 @@ public class MemberController {
             return "/member/createMemberForm";
         }
         memberService.updateMember(id, form);
-        return "redirect:/";
+        return "redirect:/member/members";
     }
 
     @GetMapping("/members/member/{id}/delete")
     public String deleteMember(@PathVariable("id") Long id) {
         memberService.delete(id);
-        return "redirect:/members";
-    }
-
-    @GetMapping("/members")
-    public String list(Model model) {
-        List<Member> members = memberService.getAll();
-        model.addAttribute("members", members);
-        for (Member m : members) {
-            if (m.getTime() == null) {
-                return "redirect:/";
-            }
-        }
-        return "/member/list";
+        return "redirect:/member/members";
     }
 }
