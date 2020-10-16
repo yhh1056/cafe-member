@@ -26,6 +26,10 @@ public class Member {
     @JoinColumn(name = "time_id")
     private Time time;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "wage_id")
+    private Wage wage;
+
     private int oneWeekWage;
     private int twoWeekWage;
     private int threeWeekWage;
@@ -35,10 +39,16 @@ public class Member {
 
     public Member(String name) {
         this.name = name;
+        this.wage = new Wage();
+        this.time = new Time();
     }
 
     public void addTimeInfo(Time time) {
         this.time = time;
+    }
+
+    public void addWageInfo(Wage wage) {
+        this.wage = wage;
     }
 
     public void updateInfo(String name) {
@@ -50,11 +60,11 @@ public class Member {
     }
 
     public void calcWage() {
-        oneWeekWage = calcOneWeek(time.getOneWeekTime(), time.getHourlyWage());
-        twoWeekWage = calcOneWeek(time.getTwoWeekTime(), time.getHourlyWage());
-        threeWeekWage = calcOneWeek(time.getThreeWeekTime(), time.getHourlyWage());
-        fourWeekWage = calcOneWeek(time.getFourWeekTime(), time.getHourlyWage());
-        fiveWeekWage = calcOneWeek(time.getFiveWeekTime(), time.getHourlyWage());
+//        oneWeekWage = calcOneWeek(time.getOneWeekTime());
+//        twoWeekWage = calcOneWeek(time.getTwoWeekTime());
+//        threeWeekWage = calcOneWeek(time.getThreeWeekTime());
+//        fourWeekWage = calcOneWeek(time.getFourWeekTime());
+//        fiveWeekWage = calcOneWeek(time.getFiveWeekTime());
 
         totalWage = oneWeekWage + twoWeekWage + threeWeekWage + fourWeekWage + fiveWeekWage;
     }

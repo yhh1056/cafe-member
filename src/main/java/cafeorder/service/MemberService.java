@@ -2,6 +2,7 @@ package cafeorder.service;
 
 import cafeorder.domain.Member;
 import cafeorder.domain.Time;
+import cafeorder.domain.Wage;
 import cafeorder.repository.MemberRepository;
 import cafeorder.web.MemberForm;
 import lombok.RequiredArgsConstructor;
@@ -48,29 +49,17 @@ public class MemberService {
     @Transactional
     public void addTime(Long id, int[] times) {
         Member member = memberRepository.findById(id);
-        isExistedTime(times, member);
-        member.calcWage();
+        Time time = member.getTime();
+        time.changeInfo(times);
 
         memberRepository.save(member);
     }
 
-    private void isExistedTime(int[] times, Member member) {
-        if (member.getTime() != null) {
-            Time time = member.getTime();
-            time.changeInfo(times, 8590);
-        } else {
-            member.addTimeInfo(new Time(times, 8590));
-        }
-    }
-
-    private Member getFindNameMember(String name) {
-        List<Member> members = memberRepository.findByName(name);
-        for (Member findMember : members) {
-            if (findMember.equals(name)) {
-                return findMember;
-            }
-        }
-        throw new IllegalStateException("존재하지 않는 직원입니다.");
+    @Transactional
+    public void addWage(Long id, boolean[] checks) {
+        Member member = findOne(id);
+        Wage wage = member.getWage();
+        wage.changeInfo(checks);
     }
 
     @Transactional
