@@ -1,6 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/home.css"/>
+<link rel="stylesheet" href="/css/head.css"/>
+<style>
+    body {
+        background-color: #e2dbdb;
+    }
+</style>
 <head>
     <script src="https://kit.fontawesome.com/01dfb9b9dd.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
@@ -9,7 +15,9 @@
 
 <body>
 <div style="text-align: center;">
-    <div class="title">커피홀 창동점</div>
+    <div>
+        <button class="title" onclick="location.href='/'">COFFEE HOLE</button>
+    </div>
     <div class="container">
         <div class="top">
             <button class="topButton" type="button" onclick="location.href='/member/new'">

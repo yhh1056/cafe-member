@@ -1,3 +1,4 @@
+
 table {
     display: inline-block;
     border-collapse: collapse;
@@ -12,6 +13,7 @@ th {
 td {
     padding: 10px 10px 10px 10px;
 }
+
 input {
     position:absolute;
     Top:0;

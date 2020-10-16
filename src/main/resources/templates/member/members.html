@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/members.css">
+<link rel="stylesheet" href="/css/head.css">
+<style>
+    body {
+        background-color: #e2dbdb;
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        thead {
-            background : #c8c8c8;
-        }
-        th {
-            padding: 8px 8px 8px 8px;
-        }
-        td {
-            padding: 10px 10px 10px 10px;
-        }
-
-    </style>
 </head>
-<div style="text-align: center;">
-    <body>
-    <h2>월급 현황입니다</h2>
 
-    <table border="1" style="display: inline-block; border-collapse: collapse; margin: 5px;">
+<body>
+<div style="text-align: center;">
+    <div>
+        <button class="title" onclick="location.href='/'">COFFEE HOLE</button>
+    </div>
+
+    <table border="1">
         <th>번호</th>
         <th>이름</th>
         <th>1주차</th>
@@ -39,8 +37,11 @@
             <td th:text="${member.wage5}"></td>
             <td th:text="${member.total}"></td>
         </tr>
+        <tr>
+            <td colspan="5"> 총 인건비</td>
+            <td colspan="3" th:text="${total}"></td>
+        </tr>
     </table>
-
-    </body>
 </div>
+</body>
 </html>

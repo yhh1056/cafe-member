@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/createCalcForm.css">
+<link rel="stylesheet" href="/css/head.css"/>
+<style>
+    body {
+        background-color: #e2dbdb;
+    }
+</style>
+
 <head>
     <script src="https://kit.fontawesome.com/01dfb9b9dd.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
 </head>
 <meta charset="UTF-8">
 
+<body>
 <div style="text-align: center;">
-    <div class="title">커피홀 창동점</div>
+    <div>
+        <button class="title" onclick="location.href='/'">COFFEE HOLE</button>
+    </div>
     <div class="mini-title"> 근무시간 입력</div>
-    <body>
+
     <div class="container">
         <form name="calcForm" action="/member/calc" method="post" th:object="${calcForm}">
             <div>
@@ -22,38 +32,45 @@
             </div>
             <table border="1">
                 <tr>
-                    <td>1주차</td>
+                    <td class="name">1주차</td>
                     <td>
                         <label th:for="time1"></label>
                         <input type="number" th:field="*{time1}"/>
+                        <input type="checkbox"> 주휴 적용
                     </td>
                 </tr>
                 <tr>
-                    <td>2주차</td>
+                    <td class="name">2주차</td>
                     <td>
                         <label th:for="time2"></label>
                         <input type="number" th:field="*{time2}"/>
+                        <input type="checkbox"> 주휴 적용
                     </td>
                 </tr>
                 <tr>
-                    <td>3주차</td>
+                    <td class="name">3주차</td>
                     <td>
                         <label th:for="time3"></label>
                         <input type="number" th:field="*{time3}"/>
+                        <input type="checkbox"> 주휴 적용
                     </td>
                 </tr>
                 <tr>
-                    <td>4주차</td>
+                    <td class="name">4주차</td>
                     <td>
                         <label th:for="time4"></label>
                         <input type="number" th:field="*{time4}"/>
+                        <input type="checkbox"> 주휴 적용
                     </td>
                 </tr>
                 <tr>
-                    <td>5주차</td>
+                    <td class="name">주휴 계산 주</td>
                     <td>
                         <label th:for="time5"></label>
                         <input type="number" th:field="*{time5}"/>
+                        <input type="checkbox"> 주휴 적용
+<!--                        <input type="checkbox"> 미적용-->
+
                     </td>
                 </tr>
                 <tr>
@@ -65,7 +82,8 @@
             </table>
         </form>
     </div>
-    </body>
+
 </div>
+</body>
 
 </html>

@@ -1,26 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/createMemberForm.css"/>
+<link rel="stylesheet" href="/css/head.css"/>
 <style>
-    .fieldError {
-        border-color: #bd2130;
-    } </style>
-<meta charset="UTF-8">
+    body {
+        background-color: #e2dbdb;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 
 <body>
-<h2>직원을 등록하는 페이지 입니다</h2>
+<div style="text-align: center;">
+    <div>
+        <button class="title" onclick="location.href='/'">COFFEE HOLE</button>
+    </div>
 
-<form action="/member/new" method="post" th:object="${memberForm}">
-    <p>
-        <label th:for="name"></label>
-        <input type="text" th:field="*{name}" align="right"
-               th:class="${#fields.hasErrors('name')}?
-                   'form-control fieldError' : 'form-control'"/>
-    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</p>
-    </p>
+    <h2>직원 등록</h2>
 
-    <p>
-        <input type="submit" value="등록하기"/>
-    </p>
-</form>
+    <form action="/member/new" method="post" th:object="${memberForm}">
+        <div class="container">
+            <div class="in-line">
+                <input type="text" th:field="*{name}" align="right" placeholder="직원 이름 입력"
+                       th:class="${#fields.hasErrors('name')}?
+                'form-control fieldError' : 'form-control'"/>
+            </div>
+            <div class="in-line">
+                <input type="submit" value="등록">
+                <input type="button" value="뒤로가기" onclick="history.back();">
+            </div>
+            <label class="fieldError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</label>
+        </div>
+    </form>
+
+
+</div>
 </body>
 </html>
+

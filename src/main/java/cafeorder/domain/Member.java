@@ -64,7 +64,6 @@ public class Member {
             return calcVacationWage(weekTime, hourlyWage);
         }
         return calcWage(weekTime, hourlyWage);
-
     }
 
     private int calcVacationWage(int weekTime, int hourlyWage) {
