@@ -44,10 +44,16 @@ public class CalcForm {
     @PositiveOrZero(message = "유효하지 않은 입력입니다.")
     private int time5;
 
-//    @NotNull
+    private boolean check1;
+    private boolean check2;
+    private boolean check3;
+    private boolean check4;
+    private boolean check5;
+
+    //    @NotNull
     private int hourlyWage;
 
-    public int[] createTimeListForm() {
+    public int[] createTimes() {
         int[] times = new int[5];
         times[0] = time1;
         times[1] = time2;
@@ -57,4 +63,13 @@ public class CalcForm {
         return times;
     }
 
+    public boolean[] createChecks() {
+        boolean[] checks = new boolean[5];
+        checks[0] = check1;
+        checks[1] = check2;
+        checks[2] = check3;
+        checks[3] = check4;
+        checks[4] = check5;
+        return checks;
+    }
 }

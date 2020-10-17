@@ -2,9 +2,9 @@ package cafeorder.domain;
 
 import org.junit.jupiter.api.Test;
 
-import javax.rmi.CORBA.Tie;
+import java.text.DecimalFormat;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * author {yhh1056}
@@ -13,7 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class TimeTest {
 
     @Test
-    void addTime() {
+    void formatTime() {
+        int test1 = 100000;
+        String oneWeekWage;
+        DecimalFormat formatter = new DecimalFormat("###,###");
+        oneWeekWage = formatter.format(test1);
 
+        assertEquals("100,000", oneWeekWage);
     }
 }

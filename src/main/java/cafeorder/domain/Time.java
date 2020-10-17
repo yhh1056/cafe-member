@@ -30,23 +30,11 @@ public class Time {
     private int FourWeekTime;
     private int FiveWeekTime;
 
-    private int hourlyWage;
-
-    public Time(int[] times, int hourlyWage) {
-        oneWeekTime = times[0];
-        twoWeekTime = times[1];
-        ThreeWeekTime = times[2];
-        FourWeekTime = times[3];
-        FiveWeekTime = times[4];
-        this.hourlyWage = hourlyWage;
-    }
-
-    public void changeInfo(int[] timeListForm, int hourlyWage) {
+    public void changeInfo(int[] timeListForm) {
         oneWeekTime = timeListForm[0];
         twoWeekTime = timeListForm[1];
         ThreeWeekTime = timeListForm[2];
         FourWeekTime = timeListForm[3];
         FiveWeekTime = timeListForm[4];
-        this.hourlyWage = hourlyWage;
     }
 }

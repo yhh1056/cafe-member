@@ -49,7 +49,8 @@ public class CalcController {
         if (result.hasErrors()) {
             return "/member/createCalcForm";
         }
-        memberService.addTime(id, form.createTimeListForm());
+        memberService.addTime(id, form.createTimes());
+        memberService.addWage(id, form.createChecks());
 
         return "redirect:/";
     }

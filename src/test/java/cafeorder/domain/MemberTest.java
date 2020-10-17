@@ -28,7 +28,7 @@ class MemberTest {
         int[] times = new int[]{10, 10, 10, 10, 10};
         int hourWage = 8590;
 
-        member.addTimeInfo(new Time(times, hourWage));
+//        member.addTimeInfo(new Time(times, hourWage));
 
         assertEquals(10, member.getTime().getOneWeekTime());
     }

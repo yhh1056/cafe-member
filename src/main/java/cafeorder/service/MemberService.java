@@ -48,7 +48,7 @@ public class MemberService {
 
     @Transactional
     public void addTime(Long id, int[] times) {
-        Member member = memberRepository.findById(id);
+        Member member = findOne(id);
         Time time = member.getTime();
         time.changeInfo(times);
 
@@ -60,6 +60,9 @@ public class MemberService {
         Member member = findOne(id);
         Wage wage = member.getWage();
         wage.changeInfo(checks);
+        member.calcWage();
+
+        memberRepository.save(member);
     }
 
     @Transactional

@@ -43,48 +43,21 @@ public class Member {
         this.time = new Time();
     }
 
-    public void addTimeInfo(Time time) {
-        this.time = time;
-    }
-
-    public void addWageInfo(Wage wage) {
-        this.wage = wage;
-    }
-
     public void updateInfo(String name) {
         this.name = name;
     }
 
-    public boolean equals(String name) {
-        return this.name.equals(name);
-    }
-
     public void calcWage() {
-//        oneWeekWage = calcOneWeek(time.getOneWeekTime());
-//        twoWeekWage = calcOneWeek(time.getTwoWeekTime());
-//        threeWeekWage = calcOneWeek(time.getThreeWeekTime());
-//        fourWeekWage = calcOneWeek(time.getFourWeekTime());
-//        fiveWeekWage = calcOneWeek(time.getFiveWeekTime());
+        oneWeekWage = time.getOneWeekTime() * wage.getOneWeekWage();
+        twoWeekWage = time.getTwoWeekTime() * wage.getTwoWeekWage();
+        threeWeekWage = time.getThreeWeekTime() * wage.getThreeWeekWage();
+        fourWeekWage = time.getFourWeekTime() * wage.getFourWeekWage();
+        fiveWeekWage = time.getFiveWeekTime() * wage.getFiveWeekWage();
 
         totalWage = oneWeekWage + twoWeekWage + threeWeekWage + fourWeekWage + fiveWeekWage;
     }
 
-    private int calcOneWeek(int weekTime, int hourlyWage) {
-        if (weekTime >= 15) {
-            return calcVacationWage(weekTime, hourlyWage);
-        }
-        return calcWage(weekTime, hourlyWage);
-    }
-
-    private int calcVacationWage(int weekTime, int hourlyWage) {
-        return weekTime * calcVacationPay(hourlyWage);
-    }
-
-    private int calcWage(int weekTime, int hourlyWage) {
-        return weekTime * hourlyWage;
-    }
-
-    private int calcVacationPay(int hourlyWage) {
-        return (int) (hourlyWage * 1.2);
+    public boolean equals(String name) {
+        return this.name.equals(name);
     }
 }
