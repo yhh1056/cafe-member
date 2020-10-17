@@ -1,6 +1,8 @@
 package cafeorder.dto;
 
 import cafeorder.domain.Member;
+import cafeorder.domain.Time;
+import cafeorder.domain.Wage;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

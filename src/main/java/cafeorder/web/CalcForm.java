@@ -1,5 +1,7 @@
 package cafeorder.web;
 
+import cafeorder.domain.Time;
+import cafeorder.domain.Wage;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -53,23 +55,23 @@ public class CalcForm {
     //    @NotNull
     private int hourlyWage;
 
-    public int[] createTimes() {
+    public Time createTimes() {
         int[] times = new int[5];
         times[0] = time1;
         times[1] = time2;
         times[2] = time3;
         times[3] = time4;
         times[4] = time5;
-        return times;
+        return new Time(times);
     }
 
-    public boolean[] createChecks() {
+    public Wage createChecks() {
         boolean[] checks = new boolean[5];
         checks[0] = check1;
         checks[1] = check2;
         checks[2] = check3;
         checks[3] = check4;
         checks[4] = check5;
-        return checks;
+        return new Wage(checks);
     }
 }

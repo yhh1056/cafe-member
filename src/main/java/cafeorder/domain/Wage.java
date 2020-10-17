@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Wage {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "wage_id")
     private Long id;
 
@@ -30,10 +30,13 @@ public class Wage {
     private int fourWeekWage;
     private int fiveWeekWage;
 
-    //최저시급
-    private final int hourlyWage = 8590;
-    //주휴 시급
-    private final int vacationWage = (int) (8590 * 1.2);
+    public Wage(boolean[] checks) {
+        this.oneWeekWage = getWage(checks[0]);
+        this.twoWeekWage = getWage(checks[1]);
+        this.threeWeekWage = getWage(checks[2]);
+        this.fourWeekWage = getWage(checks[3]);
+        this.fiveWeekWage = getWage(checks[4]);
+    }
 
     public void changeInfo(boolean[] checks) {
         this.oneWeekWage = getWage(checks[0]);
@@ -45,8 +48,8 @@ public class Wage {
 
     private int getWage(boolean check) {
         if (check) {
-            return vacationWage;
+            return (int) (8590 * 1.2);
         }
-        return hourlyWage;
+        return 8590;
     }
 }

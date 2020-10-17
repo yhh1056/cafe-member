@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class Member {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
     @Column(name = "member_name")
@@ -39,8 +40,6 @@ public class Member {
 
     public Member(String name) {
         this.name = name;
-        this.wage = new Wage();
-        this.time = new Time();
     }
 
     public void updateInfo(String name) {
@@ -59,5 +58,13 @@ public class Member {
 
     public boolean equals(String name) {
         return this.name.equals(name);
+    }
+
+    public void addTime(Time time) {
+        this.time = time;
+    }
+
+    public void addWage(Wage wage) {
+        this.wage = wage;
     }
 }

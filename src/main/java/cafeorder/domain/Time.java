@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Time {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "time_id")
     private Long id;
 
@@ -30,8 +30,16 @@ public class Time {
     private int FourWeekTime;
     private int FiveWeekTime;
 
+    public Time(int[] timeListForm) {
+        this.oneWeekTime = timeListForm[0];
+        twoWeekTime = timeListForm[1];
+        ThreeWeekTime = timeListForm[2];
+        FourWeekTime = timeListForm[3];
+        FiveWeekTime = timeListForm[4];
+    }
+
     public void changeInfo(int[] timeListForm) {
-        oneWeekTime = timeListForm[0];
+        this.oneWeekTime = timeListForm[0];
         twoWeekTime = timeListForm[1];
         ThreeWeekTime = timeListForm[2];
         FourWeekTime = timeListForm[3];
