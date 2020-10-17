@@ -4,7 +4,17 @@
 <link rel="stylesheet" href="/css/head.css"/>
 <style>
     body {
-        background-color: #e2dbdb;
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        font-size: 1.5rem;
+        background-color:#222222;
+    }
+
+    select {
+        width: 100%;
     }
 </style>
 
@@ -19,7 +29,6 @@
     <div>
         <button class="title" onclick="location.href='/'">COFFEE HOLE</button>
     </div>
-    <div class="mini-title"> 근무시간 입력</div>
 
     <div class="container">
         <form name="calcForm" action="/member/calc" method="post" th:object="${calcForm}">

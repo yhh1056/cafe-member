@@ -47,21 +47,19 @@ public class MemberService {
     }
 
     @Transactional
-    public void addTime(Long id, int[] times) {
+    public void addTime(Long id, Time time) {
         Member member = findOne(id);
-        Time time = member.getTime();
-        time.changeInfo(times);
+        member.addTime(time);
 
         memberRepository.save(member);
     }
 
     @Transactional
-    public void addWage(Long id, boolean[] checks) {
+    public void addWage(Long id, Wage wage) {
         Member member = findOne(id);
-        Wage wage = member.getWage();
-        wage.changeInfo(checks);
-        member.calcWage();
+        member.addWage(wage);
 
+        member.calcWage();
         memberRepository.save(member);
     }
 
