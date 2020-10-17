@@ -1,0 +1,44 @@
+.top {
+    margin-bottom: 1px;
+    margin-top: 20px;
+}
+
+.container {
+    color: #87c9ff;
+}
+
+.topButton {
+    position: relative;
+    height: 300px;
+    width: 300px;
+    display: inline-block;
+    background-color: #3e70ff;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+.bottomButton {
+    position: relative;
+    height: 300px;
+    width: 300px;
+    display: inline-block;
+    background-color: #0da824;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+.btn {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 15pt;
+}
+
+i {
+    font-size: 50px;
+    position: absolute;
+    left: 230px;
+    top: 230px;
+}

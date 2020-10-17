@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/members.css">
+<link rel="stylesheet" href="/css/head.css">
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        font-size: 1.5rem;
+        background-color:#222222;
+    }
+    td {
+        padding: 10px 10px 10px 10px;
+        color: white;
+    }
+    .tb {
+        margin-top: 30px;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div style="text-align: center;">
+    <div>
+        <button class="title" onclick="location.href='/'">COFFEE HOLE</button>
+    </div>
+
+    <table class="tb" border="1">
+        <th>번호</th>
+        <th>이름</th>
+        <th>1주차</th>
+        <th>2주차</th>
+        <th>3주차</th>
+        <th>4주차</th>
+        <th>5주차</th>
+        <th>월급</th>
+        <tr th:each="member : ${membersDto}">
+            <td th:text="${memberStat.count}"></td>
+            <td th:text="${member.name}"></td>
+            <td th:text="${member.wage1}"></td>
+            <td th:text="${member.wage2}"></td>
+            <td th:text="${member.wage3}"></td>
+            <td th:text="${member.wage4}"></td>
+            <td th:text="${member.wage5}"></td>
+            <td th:text="${member.total}"></td>
+        </tr>
+        <tr>
+            <td colspan="5"> 총 인건비</td>
+            <td colspan="3" th:text="${total}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
