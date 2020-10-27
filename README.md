@@ -7,9 +7,9 @@
 - 직원을 등록하고 근무 시간을 입력하면 직원의 월급과 총 인건비를 확인할 수 있다.
 
 ---
-[회고록](https://www.notion.so/04e2e9fad78f4f11aec46b41ac14d7b2)
----
 
+
+## - 기본 페이지
 <img width="1077" alt="스크린샷 2020-10-26 오전 11 22 02" 
 src="https://user-images.githubusercontent.com/58363663/97127945-5f78c300-177e-11eb-8f88-acb51e76eb9f.png">
 
@@ -29,3 +29,7 @@ src="https://user-images.githubusercontent.com/58363663/97127986-80411880-177e-1
 
 <img width="879" alt="스크린샷 2020-10-26 오전 11 25 13" 
 src="https://user-images.githubusercontent.com/58363663/97127988-820adc00-177e-11eb-9c05-90026a07233f.png">
+
+---
+노션 [회고록](https://www.notion.so/04e2e9fad78f4f11aec46b41ac14d7b2)
+---
