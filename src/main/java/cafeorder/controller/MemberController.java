@@ -1,23 +1,17 @@
 package cafeorder.controller;
 
-import cafeorder.domain.Member;
 import cafeorder.dto.MemberDto;
-import cafeorder.dto.MemberListDto;
-import cafeorder.dto.MembersDto;
-import cafeorder.dto.TotalDto;
 import cafeorder.service.MemberService;
-import cafeorder.web.CalcForm;
 import cafeorder.web.MemberForm;
 import cafeorder.web.MembersForm;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * author {yhh1056}
