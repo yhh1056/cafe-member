@@ -63,10 +63,9 @@ public class MemberController {
         return "/member/updateForm";
     }
 
-    @PostMapping("/members/update")
-    public String updateMember(@Valid MemberForm form,
-                               BindingResult result,
-                               @RequestParam("memberId") Long id) {
+    @PostMapping("/members/update/{id}")
+    public String updateMember(@PathVariable("id") Long id, @Valid MemberForm form,
+                               BindingResult result) {
         if (result.hasErrors()) {
             return "/member/createMemberForm";
         }
