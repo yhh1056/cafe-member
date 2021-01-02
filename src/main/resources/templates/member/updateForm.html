@@ -73,7 +73,7 @@
         <button class="title" onclick="location.href='/'">COFFEE HOLE</button>
     </div>
 
-    <form action="/members/update" method="post" th:object="${form}">
+    <form th:action="@{/members/update/{id} (id=${form.id})}" method="post" th:object="${form}">
         <div class="container">
             <div>
                 <div class="head-text">
