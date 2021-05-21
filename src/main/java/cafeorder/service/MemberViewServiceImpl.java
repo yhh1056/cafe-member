@@ -58,7 +58,7 @@ public class MemberViewServiceImpl implements MemberViewService {
             dto.setWage3(MoneyString.of(member.getWages().get(2).getWage()));
             dto.setWage4(MoneyString.of(member.getWages().get(3).getWage()));
             dto.setWage5(MoneyString.of(member.getWages().get(4).getWage()));
-            dto.setTotal(member.getTotalWage() + "원");
+            dto.setTotal(MoneyString.of(member.getTotalWage()));
             dtos.add(dto);
         }
 
