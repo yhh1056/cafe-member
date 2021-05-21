@@ -1,42 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/css/createCalcForm.css">
-<link rel="stylesheet" href="/css/head.css"/>
-<style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-        font-size: 1.5rem;
-        background-color:#222222;
-    }
-
-    select {
-        width: 100%;
-    }
-</style>
 
 <head>
     <script src="https://kit.fontawesome.com/01dfb9b9dd.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/head.css"/>
+    <link rel="stylesheet" href="/css/members/calc.css">
 </head>
 <meta charset="UTF-8">
-
 <body>
+<div th:replace="fragments :: logo"></div>
 <div style="text-align: center;">
-    <div>
-        <button class="title" onclick="location.href='/'">COFFEE HOLE</button>
-    </div>
 
     <div class="container">
-        <form name="calcForm" action="/member/calc" method="post" th:object="${calcForm}">
+        <form name="calcForm" th:action="@{/members/calc}" method="post" th:object="${calcForm}">
             <div>
                 <select name="memberId" id="memberId">
                     <option> 직원 선택</option>
-                    <option th:each="member : ${members}" th:value="${member.id}"
-                            th:text="${member.name}"/>
+                    <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"/>
                 </select>
             </div>
             <table border="1">
@@ -78,7 +59,7 @@
                         <label th:for="time5"></label>
                         <input type="number" th:field="*{time5}"/>
                         <input type="checkbox" th:field="*{check1}"> 주휴 적용
-<!--                        <input type="checkbox"> 미적용-->
+                        <!--                        <input type="checkbox"> 미적용-->
 
                     </td>
                 </tr>
