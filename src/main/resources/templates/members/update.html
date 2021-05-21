@@ -9,7 +9,7 @@
 <body>
 <div th:replace="fragments :: logo"></div>
 <div>
-    <form th:action="@{/members/{id}/update (id=${form.id})}" method="post" th:object="${form}">
+    <form th:action="@{/members/{id}/update (id=${memberDto.id})}" method="post" th:object="${memberDto}">
         <div class="container">
             <div>
                 <div class="head-text">

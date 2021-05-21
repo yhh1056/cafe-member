@@ -1,10 +1,9 @@
 package cafeorder.repository;
 
 import cafeorder.domain.Member;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -12,30 +11,13 @@ import java.util.List;
  * Create by {2020/09/29}
  */
 
-@Repository
-@RequiredArgsConstructor
-public class MemberRepository {
+public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    private final EntityManager em;
+    Optional<Member> findById(Long id);
 
-    public Member findById(Long id) {
-        return em.find(Member.class, id);
-    }
+    List<Member> findAll();
 
-    public void save(Member member) {
-        em.persist(member);
-    }
+    void delete(Member member);
 
-    public List<Member> findByName(String name) {
-        return em.createQuery("SELECT m FROM Member m WHERE m.name = :name", Member.class).
-                setParameter("name", name).getResultList();
-    }
-
-    public List<Member> findAll() {
-        return em.createQuery("SELECT m FROM Member m", Member.class).getResultList();
-    }
-
-    public void delete(Member member) {
-        em.remove(member);
-    }
+    boolean existsByName(String name);
 }

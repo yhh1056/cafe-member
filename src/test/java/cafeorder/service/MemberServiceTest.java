@@ -47,7 +47,7 @@ class MemberServiceTest {
     @Test
     @DisplayName("")
     void getAll() {
-        assertEquals(2, memberService.getAll().size());
+        assertEquals(2, memberService.getAllName().size());
     }
 
 }

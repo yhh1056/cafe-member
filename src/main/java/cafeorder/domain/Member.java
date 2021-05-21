@@ -1,10 +1,17 @@
 package cafeorder.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 /**
  * author {yhh1056}
@@ -23,48 +30,32 @@ public class Member {
     @Column(name = "member_name")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "time_id")
-    private Time time;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Wage> wages = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "wage_id")
-    private Wage wage;
-
-    private int oneWeekWage;
-    private int twoWeekWage;
-    private int threeWeekWage;
-    private int fourWeekWage;
-    private int fiveWeekWage;
     private int totalWage;
 
     public Member(String name) {
         this.name = name;
     }
 
-    public void updateInfo(String name) {
+    public static Member of(String name) {
+        return new Member(name);
+    }
+
+    public void changeName(String name) {
         this.name = name;
     }
 
-    public void calcWage() {
-        oneWeekWage = time.getOneWeekTime() * wage.getOneWeekWage();
-        twoWeekWage = time.getTwoWeekTime() * wage.getTwoWeekWage();
-        threeWeekWage = time.getThreeWeekTime() * wage.getThreeWeekWage();
-        fourWeekWage = time.getFourWeekTime() * wage.getFourWeekWage();
-        fiveWeekWage = time.getFiveWeekTime() * wage.getFiveWeekWage();
-
-        totalWage = oneWeekWage + twoWeekWage + threeWeekWage + fourWeekWage + fiveWeekWage;
-    }
-
-    public boolean equals(String name) {
-        return this.name.equals(name);
-    }
-
-    public void addTime(Time time) {
-        this.time = time;
-    }
-
     public void addWage(Wage wage) {
-        this.wage = wage;
+        this.wages.add(wage);
+        wage.addMember(this);
     }
+
+    public void calcTotalWage() {
+        for (Wage wage : wages) {
+            this.totalWage += wage.getWage();
+        }
+    }
+
 }

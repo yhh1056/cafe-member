@@ -8,7 +8,7 @@ spring:
     include: dev
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         #        true로 하면 콘솔에 찍혀서 실서비스에 사용하면 안된다

@@ -10,7 +10,6 @@ import javax.persistence.*;
  * author {yhh1056}
  * Create by {2020/10/16}
  */
-
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,35 +20,37 @@ public class Wage {
     @Column(name = "wage_id")
     private Long id;
 
-    @OneToOne(mappedBy = "wage", cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    private int oneWeekWage;
-    private int twoWeekWage;
-    private int threeWeekWage;
-    private int fourWeekWage;
-    private int fiveWeekWage;
+    private int week;
 
-    public Wage(boolean[] checks) {
-        this.oneWeekWage = getWage(checks[0]);
-        this.twoWeekWage = getWage(checks[1]);
-        this.threeWeekWage = getWage(checks[2]);
-        this.fourWeekWage = getWage(checks[3]);
-        this.fiveWeekWage = getWage(checks[4]);
+    private int time;
+
+    @Column(nullable = false)
+    private boolean isCheck = false;
+
+    private int wage;
+
+    public static Wage create(int week, int time, boolean check) {
+        return new Wage(week, time, check);
     }
 
-    public void changeInfo(boolean[] checks) {
-        this.oneWeekWage = getWage(checks[0]);
-        this.twoWeekWage = getWage(checks[1]);
-        this.threeWeekWage = getWage(checks[2]);
-        this.fourWeekWage = getWage(checks[3]);
-        this.fiveWeekWage = getWage(checks[4]);
+    public Wage(int week, int time, boolean check) {
+        this.week = week;
+        this.time = time;
+        this.isCheck = check;
+        this.wage = calcWage(time, check);
     }
 
-    private int getWage(boolean check) {
+    private int calcWage(int time, boolean check) {
         if (check) {
-            return (int) (8590 * 1.2);
+            return (int) (time * 1.2 * 8530);
         }
-        return 8590;
+        return time * 8530;
+    }
+
+    public void addMember(Member member) {
+        this.member = member;
     }
 }

@@ -13,7 +13,7 @@
 <div style="text-align: center;">
 
     <div class="container">
-        <form name="calcForm" th:action="@{/members/calc}" method="post" th:object="${calcForm}">
+        <form name="calcForm" th:action="@{/members/wage}" method="post" th:object="${wageDto}">
             <div>
                 <select name="memberId" id="memberId">
                     <option> 직원 선택</option>
@@ -26,6 +26,7 @@
                     <td>
                         <label th:for="time1"></label>
                         <input type="number" th:field="*{time1}"/>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('time1')}" th:errors="*{time1}"></small>
                         <input type="checkbox" th:field="*{check1}"> 주휴 적용
                     </td>
                 </tr>
