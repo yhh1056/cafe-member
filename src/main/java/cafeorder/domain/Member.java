@@ -53,6 +53,7 @@ public class Member {
     }
 
     public void calcTotalWage() {
+        totalWage = 0;
         for (Wage wage : wages) {
             this.totalWage += wage.getWage();
         }

@@ -58,6 +58,7 @@ public class MemberSaveServiceImpl implements MemberSaveService {
         Member member = memberRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
 
+        member.getWages().clear();
         member.addWage(Wage.create(1, wageSaveDto.getTime1(), wageSaveDto.isCheck1()));
         member.addWage(Wage.create(2, wageSaveDto.getTime2(), wageSaveDto.isCheck2()));
         member.addWage(Wage.create(3, wageSaveDto.getTime3(), wageSaveDto.isCheck3()));
