@@ -1,6 +1,7 @@
 package cafeorder.controller;
 
-import cafeorder.service.MemberService;
+import cafeorder.service.MemberSaveService;
+import cafeorder.service.MemberViewService;
 import cafeorder.web.MemberDto;
 import cafeorder.web.WageDto;
 import javax.validation.Valid;
@@ -24,7 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/members")
 public class MemberController {
 
-    private final MemberService memberService;
+    private final MemberSaveService memberSaveService;
+    private final MemberViewService memberViewService;
 
     @GetMapping("/form")
     public String create(Model model) {
@@ -40,20 +42,20 @@ public class MemberController {
         if (result.hasErrors()) {
             return "members/form";
         }
-        memberService.addMember(memberDto);
+        memberSaveService.addMember(memberDto);
         return "redirect:/";
     }
 
     @GetMapping("/info")
     public String updateForm(Model model) {
-        model.addAttribute("members", memberService.getAllName());
+        model.addAttribute("members", memberViewService.getAllName());
 
         return "members/info";
     }
 
     @GetMapping("/{id}/update")
     public String updateMemberForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("memberDto", memberService.getBy(id));
+        model.addAttribute("memberDto", memberViewService.getBy(id));
         return "members/update";
     }
 
@@ -63,19 +65,19 @@ public class MemberController {
         if (result.hasErrors()) {
             return "members/form";
         }
-        memberService.updateMember(id, form);
+        memberSaveService.updateMember(id, form);
         return "redirect:/members/info";
     }
 
     @PostMapping("/{id}/delete")
     public String deleteMember(@PathVariable("id") Long id) {
-        memberService.deleteMember(id);
+        memberSaveService.deleteMember(id);
         return "redirect:/members/info";
     }
 
     @GetMapping("/wage")
     public String calcForm(Model model) {
-        model.addAttribute("members", memberService.getAllName());
+        model.addAttribute("members", memberViewService.getAllName());
         model.addAttribute("wageDto", new WageDto());
         return "members/wage";
     }
@@ -90,14 +92,14 @@ public class MemberController {
             return "members/wage";
         }
 
-        memberService.addWage(id, wageDto);
+        memberSaveService.addWage(id, wageDto);
         return "redirect:/";
     }
 
     @GetMapping("/total")
     public String total(Model model) {
-        model.addAttribute("members", memberService.getAll());
-        model.addAttribute("total", memberService.getTotal());
+        model.addAttribute("members", memberViewService.getAll());
+        model.addAttribute("total", memberViewService.getTotal());
 
         return "/members/total";
     }

@@ -23,10 +23,10 @@ import static org.mockito.BDDMockito.given;
  */
 @ExtendWith(MockitoExtension.class)
 @Transactional
-class MemberServiceTest {
+class MemberSaveServiceImplTest {
 
     @InjectMocks
-    MemberService memberService;
+    MemberSaveServiceImpl memberServiceImpl;
     @Mock
     MemberRepository memberRepository;
 
@@ -44,10 +44,10 @@ class MemberServiceTest {
 
     }
 
-    @Test
-    @DisplayName("")
-    void getAll() {
-        assertEquals(2, memberService.getAllName().size());
-    }
+//    @Test
+//    @DisplayName("")
+//    void getAll() {
+//        assertEquals(2, memberServiceImpl.getAllName().size());
+//    }
 
 }

@@ -1,45 +1,29 @@
 package cafeorder.service;
 
 import cafeorder.domain.Member;
-import cafeorder.domain.Wage;
 import cafeorder.repository.MemberRepository;
 import cafeorder.util.MoneyString;
 import cafeorder.web.MemberDto;
 import cafeorder.web.MemberViewDto;
-import cafeorder.web.WageDto;
 import java.util.ArrayList;
-import javax.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 /**
- * author {yhh1056}
- * Create by {2020/09/29}
+ * Created by IntelliJ IDEA
+ * User: yhh1056@naver.com
+ * Date: 2021/05/22 Time: 12:25 오전
  */
-
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class MemberService {
+@Transactional(readOnly = true)
+public class MemberViewServiceImpl implements MemberViewService {
 
     private final MemberRepository memberRepository;
 
-    @Transactional
-    public void addMember(MemberDto memberDto) {
-        String name = memberDto.getName();
-        isExistedName(name);
-        memberRepository.save(Member.of(name));
-    }
-
-    private void isExistedName(String name) {
-        if (memberRepository.existsByName(name)) {
-            throw new IllegalArgumentException("같은 이름의 직원이 존재합니다");
-        }
-    }
-
+    @Override
     public MemberDto getBy(Long id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
@@ -50,6 +34,7 @@ public class MemberService {
         return memberDto;
     }
 
+    @Override
     public List<MemberDto> getAllName() {
         List<MemberDto> dtos = new ArrayList<>();
         for (Member member : memberRepository.findAll()) {
@@ -62,34 +47,7 @@ public class MemberService {
         return dtos;
     }
 
-    @Transactional
-    public void updateMember(Long id, MemberDto form) {
-        Member member = memberRepository.findById(id)
-                .orElseThrow(IllegalAccessError::new);
-
-        member.changeName(form.getName());
-    }
-
-    @Transactional
-    public void deleteMember(Long id) {
-        memberRepository.delete(memberRepository.findById(id)
-                .orElseThrow(IllegalAccessError::new));
-    }
-
-    @Transactional
-    public void addWage(Long id, @Valid WageDto wageDto) {
-        Member member = memberRepository.findById(id)
-                .orElseThrow(IllegalAccessError::new);
-
-        member.addWage(Wage.create(1, wageDto.getTime1(), wageDto.isCheck1()));
-        member.addWage(Wage.create(2, wageDto.getTime2(), wageDto.isCheck2()));
-        member.addWage(Wage.create(3, wageDto.getTime3(), wageDto.isCheck3()));
-        member.addWage(Wage.create(4, wageDto.getTime4(), wageDto.isCheck4()));
-        member.addWage(Wage.create(5, wageDto.getTime5(), wageDto.isCheck5()));
-
-        member.calcTotalWage();
-    }
-
+    @Override
     public List<MemberViewDto> getAll() {
         List<MemberViewDto> dtos = new ArrayList<>();
         for (Member member : memberRepository.findAll()) {
@@ -108,6 +66,7 @@ public class MemberService {
         return dtos;
     }
 
+    @Override
     public String getTotal() {
         return MoneyString.of(calcTotal(memberRepository.findAll()));
     }
@@ -117,4 +76,5 @@ public class MemberService {
                 .mapToInt(Member::getTotalWage)
                 .sum();
     }
+
 }
