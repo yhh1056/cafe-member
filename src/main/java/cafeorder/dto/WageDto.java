@@ -1,4 +1,4 @@
-package cafeorder.web;
+package cafeorder.dto;
 
 import lombok.Getter;
 import lombok.Setter;

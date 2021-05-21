@@ -2,8 +2,8 @@ package cafeorder.controller;
 
 import cafeorder.service.MemberSaveService;
 import cafeorder.service.MemberViewService;
-import cafeorder.web.MemberDto;
-import cafeorder.web.WageDto;
+import cafeorder.dto.MemberDto;
+import cafeorder.dto.WageDto;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

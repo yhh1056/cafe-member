@@ -1,7 +1,7 @@
 package cafeorder.service;
 
-import cafeorder.web.MemberDto;
-import cafeorder.web.MemberViewDto;
+import cafeorder.dto.MemberDto;
+import cafeorder.dto.MemberViewDto;
 import java.util.List;
 
 /**

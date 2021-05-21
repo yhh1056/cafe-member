@@ -1,7 +1,7 @@
 package cafeorder.service;
 
-import cafeorder.web.MemberDto;
-import cafeorder.web.WageDto;
+import cafeorder.dto.MemberDto;
+import cafeorder.dto.WageDto;
 
 /**
  * Created by IntelliJ IDEA
