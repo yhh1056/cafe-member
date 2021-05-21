@@ -1,9 +1,9 @@
 package cafeorder.controller;
 
+import cafeorder.dto.MemberSaveDto;
+import cafeorder.dto.WageSaveDto;
 import cafeorder.service.MemberSaveService;
 import cafeorder.service.MemberViewService;
-import cafeorder.dto.MemberDto;
-import cafeorder.dto.WageDto;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class MemberController {
 
     @GetMapping("/form")
     public String create(Model model) {
-        model.addAttribute(new MemberDto());
+        model.addAttribute(new MemberSaveDto());
         return "members/form";
     }
 
@@ -38,11 +38,11 @@ public class MemberController {
      * todo : 예외처리
      */
     @PostMapping("/form")
-    public String add(@Valid MemberDto memberDto, BindingResult result) {
+    public String add(@Valid MemberSaveDto memberSaveDto, BindingResult result) {
         if (result.hasErrors()) {
             return "members/form";
         }
-        memberSaveService.addMember(memberDto);
+        memberSaveService.addMember(memberSaveDto);
         return "redirect:/";
     }
 
@@ -60,7 +60,7 @@ public class MemberController {
     }
 
     @PostMapping("/{id}/update")
-    public String updateMember(@PathVariable("id") Long id, @Valid MemberDto form,
+    public String updateMember(@PathVariable("id") Long id, @Valid MemberSaveDto form,
             BindingResult result) {
         if (result.hasErrors()) {
             return "members/form";
@@ -78,7 +78,7 @@ public class MemberController {
     @GetMapping("/wage")
     public String calcForm(Model model) {
         model.addAttribute("members", memberViewService.getAllName());
-        model.addAttribute("wageDto", new WageDto());
+        model.addAttribute("wageDto", new WageSaveDto());
         return "members/wage";
     }
 
@@ -87,12 +87,12 @@ public class MemberController {
      * 에러페이지 추가
      */
     @PostMapping("/wage")
-    public String wage(@RequestParam("memberId") Long id, @Valid WageDto wageDto, BindingResult result) {
+    public String wage(@RequestParam("memberId") Long id, @Valid WageSaveDto wageSaveDto, BindingResult result) {
         if (result.hasErrors()) {
             return "members/wage";
         }
 
-        memberSaveService.addWage(id, wageDto);
+        memberSaveService.addWage(id, wageSaveDto);
         return "redirect:/";
     }
 

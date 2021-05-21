@@ -1,11 +1,10 @@
 package cafeorder.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * author {yhh1056}
@@ -14,7 +13,7 @@ import javax.validation.constraints.PositiveOrZero;
 
 @Getter
 @Setter
-public class WageDto {
+public class WageSaveDto {
 
     private Long memberId;
 

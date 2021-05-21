@@ -2,9 +2,9 @@ package cafeorder.service;
 
 import cafeorder.domain.Member;
 import cafeorder.domain.Wage;
+import cafeorder.dto.MemberSaveDto;
 import cafeorder.repository.MemberRepository;
-import cafeorder.dto.MemberDto;
-import cafeorder.dto.WageDto;
+import cafeorder.dto.WageSaveDto;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,8 +24,8 @@ public class MemberSaveServiceImpl implements MemberSaveService {
 
     @Override
     @Transactional
-    public void addMember(MemberDto memberDto) {
-        String name = memberDto.getName();
+    public void addMember(MemberSaveDto memberSaveDto) {
+        String name = memberSaveDto.getName();
         isExistedName(name);
         memberRepository.save(Member.of(name));
     }
@@ -38,7 +38,7 @@ public class MemberSaveServiceImpl implements MemberSaveService {
 
     @Override
     @Transactional
-    public void updateMember(Long id, MemberDto form) {
+    public void updateMember(Long id, MemberSaveDto form) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
 
@@ -54,15 +54,15 @@ public class MemberSaveServiceImpl implements MemberSaveService {
 
     @Override
     @Transactional
-    public void addWage(Long id, @Valid WageDto wageDto) {
+    public void addWage(Long id, @Valid WageSaveDto wageSaveDto) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
 
-        member.addWage(Wage.create(1, wageDto.getTime1(), wageDto.isCheck1()));
-        member.addWage(Wage.create(2, wageDto.getTime2(), wageDto.isCheck2()));
-        member.addWage(Wage.create(3, wageDto.getTime3(), wageDto.isCheck3()));
-        member.addWage(Wage.create(4, wageDto.getTime4(), wageDto.isCheck4()));
-        member.addWage(Wage.create(5, wageDto.getTime5(), wageDto.isCheck5()));
+        member.addWage(Wage.create(1, wageSaveDto.getTime1(), wageSaveDto.isCheck1()));
+        member.addWage(Wage.create(2, wageSaveDto.getTime2(), wageSaveDto.isCheck2()));
+        member.addWage(Wage.create(3, wageSaveDto.getTime3(), wageSaveDto.isCheck3()));
+        member.addWage(Wage.create(4, wageSaveDto.getTime4(), wageSaveDto.isCheck4()));
+        member.addWage(Wage.create(5, wageSaveDto.getTime5(), wageSaveDto.isCheck5()));
 
         member.calcTotalWage();
     }

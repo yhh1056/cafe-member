@@ -1,6 +1,5 @@
 package cafeorder.service;
 
-import cafeorder.dto.MemberDto;
 import cafeorder.dto.MemberViewDto;
 import java.util.List;
 
@@ -11,9 +10,9 @@ import java.util.List;
  */
 public interface MemberViewService {
 
-    MemberDto getBy(Long id);
+    MemberViewDto getBy(Long id);
 
-    List<MemberDto> getAllName();
+    List<MemberViewDto> getAllName();
 
     List<MemberViewDto> getAll();
 

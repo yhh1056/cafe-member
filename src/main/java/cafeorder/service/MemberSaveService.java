@@ -1,7 +1,7 @@
 package cafeorder.service;
 
-import cafeorder.dto.MemberDto;
-import cafeorder.dto.WageDto;
+import cafeorder.dto.MemberSaveDto;
+import cafeorder.dto.WageSaveDto;
 
 /**
  * Created by IntelliJ IDEA
@@ -10,12 +10,12 @@ import cafeorder.dto.WageDto;
  */
 public interface MemberSaveService {
 
-    void addMember(MemberDto memberDto);
+    void addMember(MemberSaveDto memberSaveDto);
 
-    void updateMember(Long id, MemberDto form);
+    void updateMember(Long id, MemberSaveDto form);
 
     void deleteMember(Long id);
 
-    void addWage(Long id, WageDto wageDto);
+    void addWage(Long id, WageSaveDto wageSaveDto);
 
 }

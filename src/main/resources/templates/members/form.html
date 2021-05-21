@@ -12,7 +12,7 @@
 <body>
 <div th:replace="fragments :: logo"></div>
 <div class="container">
-    <form class="form-box" th:action="@{/members/form}" method="post" th:object="${memberDto}">
+    <form class="form-box" th:action="@{/members/form}" method="post" th:object="${memberSaveDto}">
 
         <div class="head-text">
             <div>

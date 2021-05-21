@@ -3,7 +3,6 @@ package cafeorder.service;
 import cafeorder.domain.Member;
 import cafeorder.repository.MemberRepository;
 import cafeorder.util.MoneyString;
-import cafeorder.dto.MemberDto;
 import cafeorder.dto.MemberViewDto;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,21 +23,21 @@ public class MemberViewServiceImpl implements MemberViewService {
     private final MemberRepository memberRepository;
 
     @Override
-    public MemberDto getBy(Long id) {
+    public MemberViewDto getBy(Long id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
 
-        MemberDto memberDto = new MemberDto();
-        memberDto.setId(member.getId());
-        memberDto.setName(member.getName());
-        return memberDto;
+        MemberViewDto dto = new MemberViewDto();
+        dto.setId(member.getId());
+        dto.setName(member.getName());
+        return dto;
     }
 
     @Override
-    public List<MemberDto> getAllName() {
-        List<MemberDto> dtos = new ArrayList<>();
+    public List<MemberViewDto> getAllName() {
+        List<MemberViewDto> dtos = new ArrayList<>();
         for (Member member : memberRepository.findAll()) {
-            MemberDto dto = new MemberDto();
+            MemberViewDto dto = new MemberViewDto();
             dto.setId(member.getId());
             dto.setName(member.getName());
 
