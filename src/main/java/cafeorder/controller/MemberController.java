@@ -34,9 +34,6 @@ public class MemberController {
         return "members/form";
     }
 
-    /**
-     * todo : 예외처리
-     */
     @PostMapping("/form")
     public String add(@Valid MemberSaveDto memberSaveDto, BindingResult result) {
         if (result.hasErrors()) {

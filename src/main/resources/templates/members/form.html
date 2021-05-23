@@ -22,8 +22,7 @@
         <div>
             <!--                <div class="input-box">-->
             <input class="form-control" type="text" id="name" placeholder="직원의 이름을 입력해주세요"
-                   th:field="*{name}"
-                   th:class="${#fields.hasErrors('name')}?'form-control fieldError' : 'form-control'"/>
+                   th:field="*{name}"/>
             <label class="fieldError" th:for="name"
                    th:if="${#fields.hasErrors('name')}"
                    th:errors="*{name}"> Incorrect date
