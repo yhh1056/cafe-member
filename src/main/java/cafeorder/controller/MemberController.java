@@ -75,17 +75,17 @@ public class MemberController {
     @GetMapping("/wage")
     public String calcForm(Model model) {
         model.addAttribute("members", memberViewService.getAllName());
-        model.addAttribute("wageDto", new WageSaveDto());
+        model.addAttribute("wageSaveDto", new WageSaveDto());
         return "members/wage";
     }
 
-    /**
-     * TOdo : 뷰에서 예외 처리
-     * 에러페이지 추가
-     */
     @PostMapping("/wage")
-    public String wage(@RequestParam("memberId") Long id, @Valid WageSaveDto wageSaveDto, BindingResult result) {
+    public String wage(@RequestParam("memberId") Long id, Model model,
+            @Valid WageSaveDto wageSaveDto, BindingResult result) {
         if (result.hasErrors()) {
+            model.addAttribute("members", memberViewService.getAllName());
+            model.addAttribute(wageSaveDto);
+
             return "members/wage";
         }
 

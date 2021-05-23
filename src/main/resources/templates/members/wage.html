@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/head.css"/>
     <link rel="stylesheet" href="/css/members/calc.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <meta charset="UTF-8">
 <body>
@@ -13,10 +14,10 @@
 <div style="text-align: center;">
 
     <div class="container">
-        <form name="calcForm" th:action="@{/members/wage}" method="post" th:object="${wageDto}">
+        <form name="calcForm" th:action="@{/members/wage}" method="post" th:object="${wageSaveDto}">
             <div>
                 <select name="memberId" id="memberId">
-                    <option> 직원 선택</option>
+                    <option value="not-value"> 직원 선택</option>
                     <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"/>
                 </select>
             </div>
@@ -26,8 +27,11 @@
                     <td>
                         <label th:for="time1"></label>
                         <input type="number" th:field="*{time1}"/>
-                        <small class="form-text text-danger" th:if="${#fields.hasErrors('time1')}" th:errors="*{time1}"></small>
-                        <input type="checkbox" th:field="*{check1}"> 주휴 적용
+                        <input type="checkbox" th:field="*{check1}"/> 주휴 적용
+                        <small class="fieldError" th:for="time1"
+                        th:if="${#fields.hasErrors('time1')}"
+                        th:errors="*{time1}"> Incorrect date
+                        </small>
                     </td>
                 </tr>
                 <tr>
@@ -36,6 +40,10 @@
                         <label th:for="time2"></label>
                         <input type="number" th:field="*{time2}"/>
                         <input type="checkbox" th:field="*{check1}"> 주휴 적용
+                        <small class="fieldError" th:for="time2"
+                               th:if="${#fields.hasErrors('time2')}"
+                               th:errors="*{time2}"> Incorrect date
+                        </small>
                     </td>
                 </tr>
                 <tr>
@@ -44,6 +52,10 @@
                         <label th:for="time3"></label>
                         <input type="number" th:field="*{time3}"/>
                         <input type="checkbox" th:field="*{check1}"> 주휴 적용
+                        <small class="fieldError" th:for="time3"
+                               th:if="${#fields.hasErrors('time3')}"
+                               th:errors="*{time3}"> Incorrect date
+                        </small>
                     </td>
                 </tr>
                 <tr>
@@ -52,6 +64,10 @@
                         <label th:for="time4"></label>
                         <input type="number" th:field="*{time4}"/>
                         <input type="checkbox" th:field="*{check1}"> 주휴 적용
+                        <small class="fieldError" th:for="time4"
+                               th:if="${#fields.hasErrors('time4')}"
+                               th:errors="*{time4}"> Incorrect date
+                        </small>
                     </td>
                 </tr>
                 <tr>
@@ -60,8 +76,10 @@
                         <label th:for="time5"></label>
                         <input type="number" th:field="*{time5}"/>
                         <input type="checkbox" th:field="*{check1}"> 주휴 적용
-                        <!--                        <input type="checkbox"> 미적용-->
-
+                        <small class="fieldError" th:for="time5"
+                               th:if="${#fields.hasErrors('time5')}"
+                               th:errors="*{time5}"> Incorrect date
+                        </small>
                     </td>
                 </tr>
                 <tr>
@@ -75,6 +93,27 @@
     </div>
 
 </div>
+<script>
+
+  window.addEventListener('load', function() {
+    const formTag = document.getElementsByName("calcForm")[0];
+
+    formTag.addEventListener('submit', function(submitEvt) {
+      const formData = new FormData(this);
+
+      if (formData.get('memberId').toLowerCase() === 'not-value') {
+        Swal.fire({
+          title: 'Error!',
+          text: '직원을 선택해주세요.',
+          icon: 'error',
+          confirmButtonText: 'Cool'
+        })
+        submitEvt.preventDefault();
+      }
+    });
+  });
+
+</script>
 </body>
 
 </html>

@@ -9,8 +9,11 @@ body {
 }
 
 select {
-  width: 191px; /* 원하는 너비설정 */
+  width: 415px; /* 원하는 너비설정 */
   padding: .8em .5em; /* 여백으로 높이 설정 */
+  font-size: 13pt;
+  font-weight: 500;
+  text-align-last:center;
   font-family: inherit; /* 폰트 상속 */
   border: 1px solid #999;
   border-radius: 0px; /* iOS 둥근모서리 제거 */
@@ -74,3 +77,9 @@ input {
 /*select {*/
 /*  width: 100%;*/
 /*}*/
+
+.fieldError {
+  border-color: #bd2130;
+  color: red;
+  font-size: 10pt;
+}
