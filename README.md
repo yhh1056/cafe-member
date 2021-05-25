@@ -1,13 +1,18 @@
-# 월급 계산 웹 프로그램
+# 사장님을 위한 시급 계산기
 
 ---
 
-### **목적** : 월급 계산
-- 직원들의 월급을 손 쉽게 계산하기 위해 프로그램을 구현
-- 직원을 등록하고 근무 시간을 입력하면 직원의 월급과 총 인건비를 확인할 수 있다.
+## 📙 기능
+ 
+ ### 직원을 관리하며 주차별 근무 시간 등록 및 인건비 계산
 
 ---
 
+## 🌏 지원 브라우저 (Checked)
+
+| <img src="https://user-images.githubusercontent.com/1215767/34348387-a2e64588-ea4d-11e7-8267-a43365103afe.png" alt="Chrome" width="16px" height="16px" /> Chrome |  <img src="https://user-images.githubusercontent.com/1215767/34348394-a981f892-ea4d-11e7-9156-d128d58386b9.png" alt="Safari" width="16px" height="16px" /> Safari |
+| :---------: | :---------: |
+| Yes | Yes |
 
 ## - 기본 페이지
 <img width="1077" alt="스크린샷 2020-10-26 오전 11 22 02" 
