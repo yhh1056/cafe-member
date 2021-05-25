@@ -1,13 +1,10 @@
-package cafeorder.web;
-
-import cafeorder.domain.Time;
-import cafeorder.domain.Wage;
-import lombok.Getter;
-import lombok.Setter;
+package cafeorder.dto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * author {yhh1056}
@@ -16,7 +13,8 @@ import javax.validation.constraints.PositiveOrZero;
 
 @Getter
 @Setter
-public class CalcForm {
+public class WageSaveDto {
+
     private Long memberId;
 
     private String name;
@@ -52,26 +50,4 @@ public class CalcForm {
     private boolean check4;
     private boolean check5;
 
-    //    @NotNull
-    private int hourlyWage;
-
-    public Time createTimes() {
-        int[] times = new int[5];
-        times[0] = time1;
-        times[1] = time2;
-        times[2] = time3;
-        times[3] = time4;
-        times[4] = time5;
-        return new Time(times);
-    }
-
-    public Wage createChecks() {
-        boolean[] checks = new boolean[5];
-        checks[0] = check1;
-        checks[1] = check2;
-        checks[2] = check3;
-        checks[3] = check4;
-        checks[4] = check5;
-        return new Wage(checks);
-    }
 }

@@ -1,9 +1,9 @@
 package cafeorder.controller;
 
-import cafeorder.dto.MemberDto;
-import cafeorder.service.MemberService;
-import cafeorder.web.MemberForm;
-import cafeorder.web.MembersForm;
+import cafeorder.dto.MemberSaveDto;
+import cafeorder.dto.WageSaveDto;
+import cafeorder.service.MemberSaveService;
+import cafeorder.service.MemberViewService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * author {yhh1056}
@@ -20,56 +22,83 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/members")
 public class MemberController {
 
-    private final MemberService memberService;
+    private final MemberSaveService memberSaveService;
+    private final MemberViewService memberViewService;
 
-    @GetMapping("/member/new")
+    @GetMapping("/form")
     public String create(Model model) {
-        model.addAttribute(new MemberForm());
-        return "/member/createMemberForm";
+        model.addAttribute(new MemberSaveDto());
+        return "members/form";
     }
 
-    @PostMapping("/member/new")
-    public String add(@Valid MemberForm form, BindingResult result) {
+    @PostMapping("/form")
+    public String add(@Valid MemberSaveDto memberSaveDto, BindingResult result) {
         if (result.hasErrors()) {
-            return "/member/createMemberForm";
+            return "members/form";
         }
-        MemberDto dto = new MemberDto(form.getName());
-        memberService.add(dto.createMember());
-
+        memberSaveService.addMember(memberSaveDto);
         return "redirect:/";
     }
 
-    @GetMapping("/members/management")
+    @GetMapping("/info")
     public String updateForm(Model model) {
-        MembersForm members = new MembersForm(memberService.getAll());
-        model.addAttribute("members", members.getMembers());
+        model.addAttribute("members", memberViewService.getAllName());
 
-        return "/member/listForm";
+        return "members/info";
     }
 
-    @GetMapping("/members/member/{id}/update")
+    @GetMapping("/{id}/update")
     public String updateMemberForm(@PathVariable("id") Long id, Model model) {
-        MemberForm form = new MemberForm();
-        form.addInfo(memberService.findOne(id));
-        model.addAttribute("form", form);
-        return "/member/updateForm";
+        model.addAttribute("memberDto", memberViewService.getBy(id));
+        return "members/update";
     }
 
-    @PostMapping("/members/update/{id}")
-    public String updateMember(@PathVariable("id") Long id, @Valid MemberForm form,
-                               BindingResult result) {
+    @PostMapping("/{id}/update")
+    public String updateMember(@PathVariable("id") Long id, @Valid MemberSaveDto form,
+            BindingResult result) {
         if (result.hasErrors()) {
-            return "/member/createMemberForm";
+            return "members/form";
         }
-        memberService.updateMember(id, form);
-        return "redirect:/member/members";
+        memberSaveService.updateMember(id, form);
+        return "redirect:/members/info";
     }
 
-    @GetMapping("/members/member/{id}/delete")
+    @PostMapping("/{id}/delete")
     public String deleteMember(@PathVariable("id") Long id) {
-        memberService.delete(id);
-        return "redirect:/member/members";
+        memberSaveService.deleteMember(id);
+        return "redirect:/members/info";
     }
+
+    @GetMapping("/wage")
+    public String calcForm(Model model) {
+        model.addAttribute("members", memberViewService.getAllName());
+        model.addAttribute("wageSaveDto", new WageSaveDto());
+        return "members/wage";
+    }
+
+    @PostMapping("/wage")
+    public String wage(@RequestParam("memberId") Long id, Model model,
+            @Valid WageSaveDto wageSaveDto, BindingResult result) {
+        if (result.hasErrors()) {
+            model.addAttribute("members", memberViewService.getAllName());
+            model.addAttribute(wageSaveDto);
+
+            return "members/wage";
+        }
+
+        memberSaveService.addWage(id, wageSaveDto);
+        return "redirect:/";
+    }
+
+    @GetMapping("/total")
+    public String total(Model model) {
+        model.addAttribute("members", memberViewService.getAll());
+        model.addAttribute("total", memberViewService.getTotal());
+
+        return "/members/total";
+    }
+
 }

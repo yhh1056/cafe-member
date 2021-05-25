@@ -19,32 +19,29 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-
 <body>
+<div th:replace="fragments :: logo"></div>
 <div style="text-align: center;">
-    <div>
-        <button class="title" onclick="location.href='/'">COFFEE HOLE</button>
-    </div>
     <div class="container">
         <div class="top">
-            <button class="topButton" type="button" onclick="location.href='/member/new'">
+            <a class="topButton" type="button" th:href="@{/members/form}">
                 <i class="fas fa-user-friends"></i>
                 <span class="btn">직원 등록</span>
-            </button>
-            <button class="topButton" type="button" onclick="location.href='/members/management'">
+            </a>
+            <a class="topButton" type="button" th:href="@{/members/info}">
                 <i class="fas fa-user-cog"></i>
                 <span class="btn">직원 관리</span>
-            </button>
+            </a>
         </div>
         <div>
-            <button class="bottomButton" type="button" onclick="location.href='/member/calc'">
+            <a class="bottomButton" type="button" th:href="@{/members/wage}">
                 <i class="fas fa-calculator"></i>
                 <span class="btn"> 시급 계산</span>
-            </button>
-            <button class="bottomButton" type="button" onclick="location.href='/member/members'">
+            </a>
+            <a class="bottomButton" type="button" th:href="@{/members/total}">
                 <i class="fas fa-user-check"></i>
                 <span class="btn">월급 확인</span>
-            </button>
+            </a>
         </div>
     </div>
 </div>
