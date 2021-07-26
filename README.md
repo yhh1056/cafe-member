@@ -8,6 +8,15 @@
 
 ---
 
+## 실행 방법
+
+```bash
+git clone https://github.com/yhh1056/cafe-member.git
+./gradlew build
+cd project/build/libs
+java -jar cafe-0.0.1-SNAPSHOT.jar
+```
+
 ## 🌏 지원 브라우저 (Checked)
 
 | <img src="https://user-images.githubusercontent.com/1215767/34348387-a2e64588-ea4d-11e7-8267-a43365103afe.png" alt="Chrome" width="16px" height="16px" /> Chrome |  <img src="https://user-images.githubusercontent.com/1215767/34348394-a981f892-ea4d-11e7-9156-d128d58386b9.png" alt="Safari" width="16px" height="16px" /> Safari |
