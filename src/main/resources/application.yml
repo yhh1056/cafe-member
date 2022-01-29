@@ -1,0 +1,24 @@
+spring:
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/cafe
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+  profiles:
+    include: dev
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        true로 하면 콘솔에 찍혀서 실서비스에 사용하면 안된다
+        #        show_sql: true
+        format_sql: true
+
+# sql 메세지를 로그에 출력한다.
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: info
+server:
+  port: 8888

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/head.css"/>
+    <link rel="stylesheet" href="/css/members/update.css"/>
+</head>
+<body>
+<div th:replace="fragments :: logo"></div>
+<div>
+    <form th:action="@{/members/{id}/form (id=${member.id})}" method="post" th:object="${member}">
+        <div class="container">
+            <div>
+                <div class="head-text">
+                    직원수정
+                </div>
+
+                <div class="input-box">
+                    <input type="text" id="name" placeholder="직원의 이름을 입력해주세요"
+                           th:field="*{name}"
+                           th:class="${#fields.hasErrors('name')}?'form-control fieldError' : 'form-control'"/>
+                    <label class="fieldError" th:for="name"
+                           th:if="${#fields.hasErrors('name')}"
+                           th:errors="*{name}"> Incorrect date
+                    </label>
+                </div>
+                <div>
+                    <button class="btn" type="submit">변경</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+</body>
+</html>

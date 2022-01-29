@@ -1,0 +1,85 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.5rem;
+  background-color:#222222;
+}
+
+select {
+  width: 415px; /* 원하는 너비설정 */
+  padding: .8em .5em; /* 여백으로 높이 설정 */
+  font-size: 13pt;
+  font-weight: 500;
+  text-align-last:center;
+  font-family: inherit; /* 폰트 상속 */
+  border: 1px solid #999;
+  border-radius: 0px; /* iOS 둥근모서리 제거 */
+  -webkit-appearance: none; /* 네이티브 외형 감추기 */
+  -moz-appearance: none;
+  appearance: none;
+  background: white url("https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg") no-repeat 95% 50%;
+}
+
+table {
+  display: inline-block;
+  border-collapse: collapse;
+  margin: 5px;
+  background-color: white;
+}
+
+tr {
+  padding: 8px 8px 8px 8px;
+}
+
+td {
+  text-align: center;
+  padding: 10px 10px 10px 10px;
+}
+
+input {
+  width: 100px;
+  height: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+.name {
+  background-color: #2d60f3;
+  color: white;
+  font-weight: bold;
+}
+
+.submit-button {
+  width: 100px;
+  height: 30px;
+}
+
+.title {
+  position: relative;
+  left: -188px;
+  font-size: 32pt;
+  font-weight: bold;
+  color: #2d60f3;
+  margin-top: 20px;
+}
+.container {
+  margin-top: 30px;
+}
+.mini-title {
+  color: black;
+  margin-top: 20px;
+  font-size: 20pt;
+  font-weight: bold;
+}
+
+/*select {*/
+/*  width: 100%;*/
+/*}*/
+
+.fieldError {
+  border-color: #bd2130;
+  color: red;
+  font-size: 10pt;
+}

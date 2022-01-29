@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/head.css">
+    <link rel="stylesheet" href="/css/members/total.css">
+</head>
+<body>
+<div th:replace="fragments :: logo"></div>
+<div style="text-align: center;">
+    <table class="tb" border="1">
+        <th>번호</th>
+        <th>이름</th>
+        <th>1주차</th>
+        <th>2주차</th>
+        <th>3주차</th>
+        <th>4주차</th>
+        <th>5주차</th>
+        <th>월급</th>
+        <tr th:each="member : ${members}">
+            <td th:text="${memberStat.count}"></td>
+            <td th:text="${member.name}"></td>
+            <td th:text="${member.waget1}"></td>
+            <td th:text="${member.waget2}"></td>
+            <td th:text="${member.waget3}"></td>
+            <td th:text="${member.waget4}"></td>
+            <td th:text="${member.waget5}"></td>
+            <td th:text="${member.total}"></td>
+        </tr>
+        <tr>
+            <td colspan="5"> 총 인건비</td>
+            <td colspan="3" th:text="${total}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/head.css"/>
+    <link rel="stylesheet" href="/css/members/info.css"/>
+</head>
+<body>
+
+<div th:replace="fragments :: logo"></div>
+<div style="text-align: center;">
+    <table border="1" style="display: inline-block; border-collapse: collapse; margin: 5px;">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>이름</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${memberStat.count}"></td>
+            <td th:text="${member.name}"></td>
+            <td>
+                <form th:action="@{/members/{id}/form (id=${member.id})}">
+                    <button type="submit">수정</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/members/{id}/delete (id=${member.id})}" method="post">
+                    <button type="submit">삭제</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

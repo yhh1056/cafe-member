@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://kit.fontawesome.com/01dfb9b9dd.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/head.css"/>
+    <link rel="stylesheet" href="/css/members/form.css">
+</head>
+<body>
+<div th:replace="fragments :: logo"></div>
+<div class="container">
+    <form class="form-box" th:action="@{/members/form}" method="post" th:object="${member}">
+
+        <div class="head-text">
+            <div>
+                직원등록
+            </div>
+        </div>
+        <div>
+            <input class="form-control" type="text" id="name" placeholder="직원의 이름을 입력해주세요"
+                   th:field="*{name}"/>
+            <label class="fieldError" th:for="name"
+                   th:if="${#fields.hasErrors('name')}"
+                   th:errors="*{name}"> Incorrect date
+            </label>
+        </div>
+        <div>
+            <button class="btn" type="submit">추가</button>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
+
