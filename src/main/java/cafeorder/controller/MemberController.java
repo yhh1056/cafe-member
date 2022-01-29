@@ -1,16 +1,14 @@
 package cafeorder.controller;
 
 import cafeorder.dto.MemberNameRequest;
-import cafeorder.dto.MemberSaveDto;
 import cafeorder.dto.MemberSaveForm;
-import cafeorder.dto.WageSaveDto;
+import cafeorder.dto.WageRequest;
 import cafeorder.service.MemberService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,29 +68,25 @@ public class MemberController {
     @GetMapping("/wage")
     public String calcForm(Model model) {
         model.addAttribute("members", memberService.getAllName());
-        model.addAttribute("wageSaveDto", new WageSaveDto());
+        model.addAttribute("wage", new WageRequest());
         return "members/wage";
     }
 
     @PostMapping("/wage")
-    public String wage(@RequestParam("memberId") Long id, Model model,
-            @Valid WageSaveDto wageSaveDto, BindingResult result) {
+    public String wage(Model model, @Valid WageRequest wageRequest, BindingResult result) {
         if (result.hasErrors()) {
             model.addAttribute("members", memberService.getAllName());
-            model.addAttribute(wageSaveDto);
-
+            model.addAttribute(wageRequest);
             return "members/wage";
         }
 
-        memberService.addWage(id, wageSaveDto);
+        memberService.addWage(wageRequest);
         return "redirect:/";
     }
 
     @GetMapping("/total")
     public String total(Model model) {
-        model.addAttribute("members", memberService.getAll());
-        model.addAttribute("total", memberService.getTotal());
-
+        model.addAttribute("members", memberService.findAll());
         return "/members/total";
     }
 

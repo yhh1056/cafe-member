@@ -1,5 +1,6 @@
 package cafeorder.util;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -12,5 +13,9 @@ public class MoneyString {
 
     public static String of(int money) {
         return FORMATTER.format(money) + UNIT;
+    }
+
+    public static String of(BigDecimal money) {
+        return FORMATTER.format(money.intValue()) + UNIT;
     }
 }

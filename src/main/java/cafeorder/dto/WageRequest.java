@@ -6,15 +6,11 @@ import javax.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * author {yhh1056}
- * Create by {2020/09/30}
- */
-
 @Getter
 @Setter
-public class WageSaveDto {
+public class WageRequest {
 
+    @NotNull
     private Long memberId;
 
     private String name;

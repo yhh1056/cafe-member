@@ -1,5 +1,7 @@
 package cafeorder.domain;
 
+import cafeorder.util.MoneyString;
+import java.util.StringJoiner;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -71,4 +73,16 @@ public class Wage {
         return MINIMUM_WAGE * workTime;
     }
 
+    public boolean isEqualsWeek(Week week) {
+        return this.week == week;
+    }
+
+    @Override
+    public String toString() {
+        return this.totalAmount.toString();
+    }
+
+    public static Wage empty() {
+        return Wage.builder().workTime(0).build();
+    }
 }

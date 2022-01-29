@@ -1,7 +1,9 @@
 package cafeorder.domain;
 
+import cafeorder.util.MoneyString;
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.StringJoiner;
 import javax.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -37,5 +39,18 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    @Override
+    public String toString() {
+        return MoneyString.of(this.amount);
+    }
+
+    public static Money zero() {
+        return new Money(0);
+    }
+
+    public void plus(Money amount) {
+        this.amount = this.amount.add(amount.getAmount());
     }
 }
