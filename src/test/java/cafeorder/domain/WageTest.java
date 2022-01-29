@@ -25,7 +25,7 @@ class WageTest {
     @Test
     @DisplayName("주 40시간 넘게 근무시 예외 발생")
     void overWorkTimeTest() {
-        int workTime = 41;
+        int workTime = Wage.MAXIMUM_WORK_TIME + 1;
         assertThatThrownBy(() -> Wage.builder().workTime(workTime).holidayPay(true).build())
             .isInstanceOf(IllegalArgumentException.class);
     }

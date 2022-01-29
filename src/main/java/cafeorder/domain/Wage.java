@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Wage {
     public static final int MINIMUM_WAGE = 8530;
-    public static final int MAXIMUM_WORK_TIME = 40;
+    public static final int MAXIMUM_WORK_TIME = 52;
 
     @Id
     @GeneratedValue
