@@ -53,15 +53,15 @@ public class MemberViewServiceImpl implements MemberViewService {
             MemberViewDto dto = new MemberViewDto();
             dto.setId(member.getId());
             dto.setName(member.getName());
-            if (!member.getWages().isEmpty()) {
-                dto.setWage1(MoneyString.of(member.getWages().get(0).getWage()));
-                dto.setWage2(MoneyString.of(member.getWages().get(1).getWage()));
-                dto.setWage3(MoneyString.of(member.getWages().get(2).getWage()));
-                dto.setWage4(MoneyString.of(member.getWages().get(3).getWage()));
-                dto.setWage5(MoneyString.of(member.getWages().get(4).getWage()));
-                dto.setTotal(MoneyString.of(member.getTotalWage()));
-                dtos.add(dto);
-            }
+            // if (!member.getWages().isEmpty()) {
+            //     dto.setWage1(MoneyString.of(member.getWages().get(0).getWage()));
+            //     dto.setWage2(MoneyString.of(member.getWages().get(1).getWage()));
+            //     dto.setWage3(MoneyString.of(member.getWages().get(2).getWage()));
+            //     dto.setWage4(MoneyString.of(member.getWages().get(3).getWage()));
+            //     dto.setWage5(MoneyString.of(member.getWages().get(4).getWage()));
+            //     dto.setTotal(MoneyString.of(member.getTotalWage()));
+            //     dtos.add(dto);
+            // }
         }
 
         return dtos;

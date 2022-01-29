@@ -1,22 +1,17 @@
 package cafeorder.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-/**
- * author {yhh1056}
- * Create by {2020/09/29}
- */
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -30,9 +25,6 @@ public class Member {
     @Column(name = "member_name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Wage> wages = new ArrayList<>();
-
     private int totalWage;
 
     public Member(String name) {
@@ -45,18 +37,6 @@ public class Member {
 
     public void changeName(String name) {
         this.name = name;
-    }
-
-    public void addWage(Wage wage) {
-        this.wages.add(wage);
-        wage.addMember(this);
-    }
-
-    public void calcTotalWage() {
-        totalWage = 0;
-        for (Wage wage : wages) {
-            this.totalWage += wage.getWage();
-        }
     }
 
 }

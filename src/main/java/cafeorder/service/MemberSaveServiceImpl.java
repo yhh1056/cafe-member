@@ -1,7 +1,6 @@
 package cafeorder.service;
 
 import cafeorder.domain.Member;
-import cafeorder.domain.Wage;
 import cafeorder.dto.MemberSaveDto;
 import cafeorder.repository.MemberRepository;
 import cafeorder.dto.WageSaveDto;
@@ -58,13 +57,13 @@ public class MemberSaveServiceImpl implements MemberSaveService {
         Member member = memberRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
 
-        member.getWages().clear();
-        member.addWage(Wage.create(1, wageSaveDto.getTime1(), wageSaveDto.isCheck1()));
-        member.addWage(Wage.create(2, wageSaveDto.getTime2(), wageSaveDto.isCheck2()));
-        member.addWage(Wage.create(3, wageSaveDto.getTime3(), wageSaveDto.isCheck3()));
-        member.addWage(Wage.create(4, wageSaveDto.getTime4(), wageSaveDto.isCheck4()));
-        member.addWage(Wage.create(5, wageSaveDto.getTime5(), wageSaveDto.isCheck5()));
+        // member.getWages().clear();
+        // member.addWage(Wage.of(Week.WEEK1, wageSaveDto.getTime1(), wageSaveDto.isCheck1(), member));
+        // member.addWage(Wage.of(Week.WEEK2, wageSaveDto.getTime2(), wageSaveDto.isCheck2(), member));
+        // member.addWage(Wage.of(Week.WEEK3, wageSaveDto.getTime3(), wageSaveDto.isCheck3(), member));
+        // member.addWage(Wage.of(Week.WEEK4, wageSaveDto.getTime4(), wageSaveDto.isCheck4(), member));
+        // member.addWage(Wage.of(Week.WEEK5, wageSaveDto.getTime5(), wageSaveDto.isCheck5(), member));
 
-        member.calcTotalWage();
+        // member.calcTotalWage();
     }
 }

@@ -1,56 +1,48 @@
 package cafeorder.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import org.apache.commons.lang3.BooleanUtils;
 
-import javax.persistence.*;
-
-/**
- * author {yhh1056}
- * Create by {2020/10/16}
- */
-@Entity
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Wage {
+    public static final int MINIMUM_WAGE = 8350;
+    public static final int MAXIMUM_WORK_TIME = 40;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "wage_id")
-    private Long id;
+    private Money totalAmount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private int workTime;
 
-    private int week;
+    private boolean isHolidayPay;
 
-    private int time;
-
-    @Column(nullable = false)
-    private boolean isCheck = false;
-
-    private int wage;
-
-    public static Wage create(int week, int time, boolean check) {
-        return new Wage(week, time, check);
+    @Builder
+    public Wage(int workTime, boolean isHolidayPay) {
+        validate(workTime);
+        this.totalAmount = calculateWage(workTime, isHolidayPay);
+        this.workTime = workTime;
+        this.isHolidayPay = isHolidayPay;
     }
 
-    public Wage(int week, int time, boolean check) {
-        this.week = week;
-        this.time = time;
-        this.isCheck = check;
-        this.wage = calcWage(time, check);
-    }
-
-    private int calcWage(int time, boolean check) {
-        if (check) {
-            return (int) (time * 1.2 * 8530);
+    private void validate(int workTime) {
+        if (workTime > MAXIMUM_WORK_TIME) {
+            throw new IllegalArgumentException("주 40시간을 넘길 수 없습니다.");
         }
-        return time * 8530;
+
+        if (workTime < 0) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
     }
 
-    public void addMember(Member member) {
-        this.member = member;
+    public Money calculateWage(int workTime, boolean isHolidayPay) {
+        return new Money(pay(workTime, isHolidayPay));
+    }
+
+    public double pay(int workTime, boolean isHolidayPay) {
+        if (isHolidayPay) {
+            return MINIMUM_WAGE * workTime * 1.2;
+        }
+        return MINIMUM_WAGE * workTime;
+    }
+
+    public Money getTotalAmount() {
+        return totalAmount;
     }
 }
