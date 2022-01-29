@@ -3,8 +3,6 @@ package cafeorder.service;
 import cafeorder.domain.Member;
 import cafeorder.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -23,10 +21,10 @@ import static org.mockito.BDDMockito.given;
  */
 @ExtendWith(MockitoExtension.class)
 @Transactional
-class MemberSaveServiceImplTest {
+class MemberServiceTest {
 
     @InjectMocks
-    MemberSaveServiceImpl memberServiceImpl;
+    MemberService memberServiceImpl;
     @Mock
     MemberRepository memberRepository;
 

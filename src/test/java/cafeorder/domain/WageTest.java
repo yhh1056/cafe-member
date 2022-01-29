@@ -10,7 +10,7 @@ class WageTest {
     @DisplayName("기본 임금 계산")
     void wageTest() {
         int workTime = 12;
-        Wage wage = Wage.builder().workTime(workTime).isHolidayPay(false).build();
+        Wage wage = Wage.builder().workTime(workTime).holidayPay(false).build();
         assertThat(wage.getTotalAmount()).isEqualTo(new Money(Wage.MINIMUM_WAGE * workTime));
     }
 
@@ -18,7 +18,7 @@ class WageTest {
     @DisplayName("주휴 수당 계산")
     void holidayPayTest() {
         int workTime = 12;
-        Wage wage = Wage.builder().workTime(workTime).isHolidayPay(true).build();
+        Wage wage = Wage.builder().workTime(workTime).holidayPay(true).build();
         assertThat(wage.getTotalAmount()).isEqualTo(new Money(Wage.MINIMUM_WAGE * workTime * 1.2));
     }
 
@@ -26,7 +26,7 @@ class WageTest {
     @DisplayName("주 40시간 넘게 근무시 예외 발생")
     void overWorkTimeTest() {
         int workTime = 41;
-        assertThatThrownBy(() -> Wage.builder().workTime(workTime).isHolidayPay(true).build())
+        assertThatThrownBy(() -> Wage.builder().workTime(workTime).holidayPay(true).build())
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -34,7 +34,7 @@ class WageTest {
     @DisplayName("근무시간을 음수로 입력시 예외 발생")
     void underWorkTimeTest() {
         int workTime = -1;
-        assertThatThrownBy(() -> Wage.builder().workTime(workTime).isHolidayPay(true).build())
+        assertThatThrownBy(() -> Wage.builder().workTime(workTime).holidayPay(true).build())
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

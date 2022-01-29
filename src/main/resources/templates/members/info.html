@@ -24,8 +24,7 @@
             <td th:text="${memberStat.count}"></td>
             <td th:text="${member.name}"></td>
             <td>
-<!--                <button type="button" th:onclick="'location.href=\'' + @{/members/{id}/update (id=${member.id})} + '\''">수정</button>-->
-                <form th:action="@{/members/{id}/update (id=${member.id})}">
+                <form th:action="@{/members/{id}/form (id=${member.id})}">
                     <button type="submit">수정</button>
                 </form>
             </td>

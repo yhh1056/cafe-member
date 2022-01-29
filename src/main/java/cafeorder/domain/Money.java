@@ -2,7 +2,14 @@ package cafeorder.domain;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import javax.persistence.Embeddable;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Embeddable
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Money {
 
     private BigDecimal amount;
@@ -24,7 +31,7 @@ public class Money {
             return false;
         }
         Money money = (Money)o;
-        return Objects.equals(amount, money.amount);
+        return Objects.equals(amount.intValue(), money.amount.intValue());
     }
 
     @Override

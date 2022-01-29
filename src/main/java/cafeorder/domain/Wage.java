@@ -1,24 +1,53 @@
 package cafeorder.domain;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import lombok.AccessLevel;
 import lombok.Builder;
-import org.apache.commons.lang3.BooleanUtils;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Wage {
-    public static final int MINIMUM_WAGE = 8350;
+    public static final int MINIMUM_WAGE = 8530;
     public static final int MAXIMUM_WORK_TIME = 40;
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Enumerated(value = EnumType.STRING)
+    private Week week;
+
+    @Embedded
     private Money totalAmount;
 
     private int workTime;
 
-    private boolean isHolidayPay;
+    private boolean holidayPay;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
 
     @Builder
-    public Wage(int workTime, boolean isHolidayPay) {
+    public Wage(Week week, int workTime, boolean holidayPay, Member member) {
         validate(workTime);
-        this.totalAmount = calculateWage(workTime, isHolidayPay);
+        this.week = week;
+        this.totalAmount = calculateWage(workTime, holidayPay);
         this.workTime = workTime;
-        this.isHolidayPay = isHolidayPay;
+        this.holidayPay = holidayPay;
+        this.member = member;
+        if (member != null) {
+            member.getWages().add(this);
+        }
     }
 
     private void validate(int workTime) {
@@ -42,7 +71,4 @@ public class Wage {
         return MINIMUM_WAGE * workTime;
     }
 
-    public Money getTotalAmount() {
-        return totalAmount;
-    }
 }
