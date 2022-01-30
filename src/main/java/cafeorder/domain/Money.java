@@ -50,7 +50,7 @@ public class Money {
         return new Money(0);
     }
 
-    public void plus(Money amount) {
-        this.amount = this.amount.add(amount.getAmount());
+    public Money plus(Money amount) {
+        return new Money(this.amount.add(amount.getAmount()));
     }
 }
