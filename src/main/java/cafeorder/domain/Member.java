@@ -31,7 +31,7 @@ public class Member {
     private List<Wage> wages = new ArrayList<>();
 
     @Embedded
-    private Money totalWage;
+    private Money totalWage = Money.zero();
 
     public Member(String name) {
         this.name = name;
@@ -46,9 +46,9 @@ public class Member {
     }
 
     public void calculateTotalWage() {
-        Money money = Money.zero();
-        wages.stream().map(Wage::getTotalAmount).forEach(money::plus);
-        this.totalWage = money;
+        for (Wage wage : wages) {
+            totalWage = totalWage.plus(wage.getTotalAmount());
+        }
     }
 
     public Wage findWeek(Week week) {

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MoneyString {
-
     private static final DecimalFormat FORMATTER = new DecimalFormat("###,###");
     private static final String UNIT = "원";
 
