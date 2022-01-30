@@ -1,5 +1,6 @@
 package cafeorder.domain;
 
+import java.nio.file.WatchKey;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
@@ -37,5 +38,13 @@ class WageTest {
         int workTime = -1;
         assertThatThrownBy(() -> Wage.builder().workTime(workTime).holidayPay(true).build())
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("empty Wage 생성 테스트")
+    void emptyWageTest() {
+        Wage empty = Wage.empty();
+
+        assertThat(empty.getTotalAmount()).isEqualTo(Money.zero());
     }
 }
