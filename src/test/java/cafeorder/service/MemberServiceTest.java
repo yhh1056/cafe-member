@@ -15,10 +15,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 
-/**
- * author {yhh1056}
- * Create by {2020/09/29}
- */
 @ExtendWith(MockitoExtension.class)
 @Transactional
 class MemberServiceTest {
@@ -41,11 +37,5 @@ class MemberServiceTest {
         given(memberRepository.findAll()).willReturn(members);
 
     }
-
-//    @Test
-//    @DisplayName("")
-//    void getAll() {
-//        assertEquals(2, memberServiceImpl.getAllName().size());
-//    }
 
 }

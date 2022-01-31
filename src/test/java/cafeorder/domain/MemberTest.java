@@ -48,4 +48,18 @@ class MemberTest {
         assertTrue(wage.isEqualsWeek(WEEK1));
         assertThat(wage.getTotalAmount()).isEqualTo(new Money(102360));
     }
+
+    @Test
+    @DisplayName("주급 정보 중복 체크 여부 테스트")
+    void memberWageHashSetTest() {
+        Member tester = Member.of("tester");
+
+        Wage.builder().week(WEEK1).workTime(12).member(tester).build();
+        Wage.builder().week(WEEK2).workTime(14).member(tester).build();
+        Wage.builder().week(WEEK2).workTime(14).member(tester).build();
+        Wage.builder().week(WEEK2).workTime(14).member(tester).build();
+        Wage.builder().week(WEEK2).workTime(14).member(tester).build();
+
+        assertThat(tester.getWages().size()).isEqualTo(2);
+    }
 }

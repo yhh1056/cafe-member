@@ -4,6 +4,7 @@ import java.nio.file.WatchKey;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Wage 테스트")
 class WageTest {
@@ -46,5 +47,31 @@ class WageTest {
         Wage empty = Wage.empty();
 
         assertThat(empty.getTotalAmount()).isEqualTo(Money.zero());
+    }
+
+    @Test
+    @DisplayName("주가 같으면 같은 객체인지 테스트")
+    void equalsTest() {
+        Wage wage1 = Wage.builder().week(Week.WEEK3).build();
+        Wage wage2 = Wage.builder().week(Week.WEEK3).build();
+
+        assertTrue(wage1.equals(wage2));
+        assertTrue(wage1.hashCode() == wage2.hashCode());
+    }
+
+    @Test
+    @DisplayName("임금 객체 생성 테스트")
+    void newWageTest() {
+        Wage wage = Wage.builder()
+            .week(Week.WEEK4)
+            .member(new Member("tester"))
+            .workTime(16)
+            .holidayPay(true)
+            .build();
+
+        assertThat(wage.getTotalAmount()).isEqualTo(new Money(163776));
+        assertThat(wage.getMember().getName()).isEqualTo("tester");
+        assertThat(wage.getWeek()).isEqualTo(Week.WEEK4);
+        assertThat(wage.getWorkTime()).isEqualTo(16);
     }
 }

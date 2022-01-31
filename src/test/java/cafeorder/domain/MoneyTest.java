@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.ModelAndView;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Money 테스트")
 public class MoneyTest {
@@ -42,5 +43,15 @@ public class MoneyTest {
         Money plus = money1.plus(money2);
 
         assertThat(plus.toString()).isEqualTo("2,000원");
+    }
+
+    @Test
+    @DisplayName("돈 일치여부 테스트")
+    void equalsTest() {
+        Money money1 = new Money(1000);
+        Money money2 = new Money(1000);
+
+        assertTrue(money1.equals(money2));
+        assertTrue(money1.hashCode() == money2.hashCode());
     }
 }

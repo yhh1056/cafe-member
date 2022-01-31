@@ -1,7 +1,9 @@
 package cafeorder.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -28,7 +30,7 @@ public class Member {
     private String name;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Wage> wages = new ArrayList<>();
+    private Set<Wage> wages = new HashSet<>();
 
     @Embedded
     private Money totalWage = Money.zero();
