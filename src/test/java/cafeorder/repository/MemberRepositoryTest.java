@@ -5,6 +5,7 @@ import cafeorder.domain.Money;
 import cafeorder.domain.Wage;
 import cafeorder.domain.Week;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,13 @@ class MemberRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
+
+    @BeforeEach
+    void setUp() {
+        memberRepository.deleteAllInBatch();
+        entityManager.flush();
+        entityManager.clear();
+    }
 
     @Test
     @DisplayName("회원 단건 조회 테스트")

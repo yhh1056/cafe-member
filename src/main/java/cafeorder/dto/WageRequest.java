@@ -13,8 +13,6 @@ public class WageRequest {
     @NotNull
     private Long memberId;
 
-    private String name;
-
     @Max(value = 52, message = "52시간을 넘길 수 없습니다.")
     @NotNull(message = "유효하지 않은 입력입니다.")
     @PositiveOrZero(message = "유효하지 않은 입력입니다.")

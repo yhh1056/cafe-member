@@ -27,27 +27,26 @@ public class MemberService {
 
     @Transactional
     public void addMember(String name) {
-        if (memberRepository.existsByName(name)) {
-            throw new IllegalArgumentException("같은 이름의 직원이 존재합니다");
-        }
+        existedName(name);
         memberRepository.save(Member.of(name));
     }
 
     @Transactional
     public void updateMember(Long id, String name) {
-        Member member = memberRepository.findById(id).orElseThrow(IllegalAccessError::new);
+        existedName(name);
+        Member member = memberRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         member.changeName(name);
     }
 
     @Transactional
     public void deleteMember(Long id) {
         memberRepository.delete(memberRepository.findById(id)
-            .orElseThrow(IllegalAccessError::new));
+            .orElseThrow(IllegalArgumentException::new));
     }
 
     @Transactional
     public void addWage(WageRequest wageRequest) {
-        Member member = memberRepository.findById(wageRequest.getMemberId()).orElseThrow(IllegalAccessError::new);
+        Member member = memberRepository.findById(wageRequest.getMemberId()).orElseThrow(IllegalArgumentException::new);
         member.getWages().clear();
 
         createWage(member, WEEK1, wageRequest.getTime1(), wageRequest.isCheck1());
@@ -104,6 +103,12 @@ public class MemberService {
         dto.setId(member.getId());
         dto.setName(member.getName());
         return dto;
+    }
+
+    private void existedName(String name) {
+        if (memberRepository.existsByName(name)) {
+            throw new IllegalArgumentException("같은 이름의 직원이 존재합니다");
+        }
     }
 
 }
