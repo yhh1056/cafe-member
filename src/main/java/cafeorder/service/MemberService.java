@@ -4,13 +4,9 @@ import cafeorder.domain.Member;
 import cafeorder.domain.Wage;
 import cafeorder.domain.Week;
 import cafeorder.dto.MemberNameResponse;
-import cafeorder.dto.MemberNamesResponse;
-import cafeorder.dto.MemberViewDto;
 import cafeorder.dto.MembersResponse;
 import cafeorder.dto.WageRequest;
 import cafeorder.repository.MemberRepository;
-import cafeorder.util.MoneyString;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -63,9 +59,9 @@ public class MemberService {
             .orElseThrow(IllegalArgumentException::new);
     }
 
-    public List<MemberNamesResponse> getAllName() {
+    public List<MemberNameResponse> getAllName() {
         return memberRepository.findMembers().stream()
-            .map(this::memberToMemberNameResponse)
+            .map(this::memberToNameResponse)
             .collect(Collectors.toList());
     }
 
@@ -96,13 +92,6 @@ public class MemberService {
         response.setId(member.getId());
         response.setName(member.getName());
         return response;
-    }
-
-    private MemberNamesResponse memberToMemberNameResponse(Member member) {
-        MemberNamesResponse dto = new MemberNamesResponse();
-        dto.setId(member.getId());
-        dto.setName(member.getName());
-        return dto;
     }
 
     private void existedName(String name) {
