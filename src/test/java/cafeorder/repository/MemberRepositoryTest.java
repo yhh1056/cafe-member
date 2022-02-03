@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import static cafeorder.domain.Week.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @DisplayName("Member Repository 테스트")
@@ -71,5 +72,15 @@ class MemberRepositoryTest {
         List<Member> members = memberRepository.findAll();
 
         assertThat(members.size()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("이름 중복 여부 테스트")
+    void exitsName() {
+        entityManager.persist(new Member("tester"));
+        entityManager.flush();
+        entityManager.clear();
+
+        assertTrue(memberRepository.existsByName("tester"));
     }
 }
